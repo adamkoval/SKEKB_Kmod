@@ -1,3 +1,4 @@
 TO-DO:
 	* Implement better organisation of folders.
+	* Improve README.md
 	* Possibly add options to utilise various functions of the script, rather than all of them at once.
