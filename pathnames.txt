@@ -1,0 +1,33 @@
+# ======================================================================= 
+# EDIT THIS FILE DEPENDING ON NEED
+# ringID: Name of the ring which you will be using "HER" or "LER".
+# initpath: <Renjun>
+# temppath: Where results will temporarily be stored while the program
+#	    runs.
+# latticefile: The path to the SAD lattice file you will be using.
+# ftwissbpm: <Renjun>
+# ftwissall: <Renjun>
+# fkmodu: <Renjun>
+# gsad: Path to the SAD executable.
+# python_exe: Path to the python executable.
+# BetaBeatsrcPath: Path to the Beta-Beat.src package.
+# harmonic_output_dir: Path to the desired directory into which the
+#		       output of hole_in_one.py will be placed.
+# phase_output_dir: Path to the desired directory into which the 
+#		    output of measure_optics.py will be placed.
+# data_input_dir: Path to the directory containing KEK datafiles.
+# ======================================================================= 
+ringID = HER
+init_path = ./lattice/
+temp_dir = ./temp/
+lattice_file = sher_5780_100_3_renjun.sad
+ftwissbpm = twiss_moni.dat
+ftwissall = twiss_all.dat
+fkmodu = simulationModulation.txt
+gsad = /home/akoval/SAD/oldsad/bin/gs
+python_exe = python2
+BetaBeatsrc_path = /home/akoval/work_local/bbeatlocal/Beta-Beat.src/
+harmonic_output_dir = harmonic_output/
+phase_output_dir = phase_output/
+data_input_dir = data_input/
+model_dir = model/

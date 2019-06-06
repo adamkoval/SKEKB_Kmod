@@ -1,0 +1,24 @@
+FFS;
+
+Get["func.n"];
+ring$name="HER"; ! "LER"
+bdir = "./../TbT/20May19/";
+ldir = "./lattice/";
+
+Library@Require["LEROptics","HEROptics"];
+If[ring$name=="LER",
+ring=LEROptics[];
+,
+ring=HEROptics[];
+];
+
+fn = FileNames2[ring$name//"*", bdir];
+
+Scan[(
+  ring@ReadOpticsFile[bdir//#];
+  CALC;
+  CreatePlainDeck[ldir//#, "RING"])&,
+  fn];
+
+end;
+abort;
