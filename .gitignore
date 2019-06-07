@@ -1,0 +1,17 @@
+# Ignoring compiled function files
+*.pyc
+
+# Ignoring generatd run files
+prerun.sad
+run.sad
+
+# Ignoring generated output files
+simulationModulation.txt
+twiss_moni.dat
+twiss_all.dat
+
+# Ignoring all output dirs
+temp/
+harmonic_output/
+phase_output/
+outofpahsex/
