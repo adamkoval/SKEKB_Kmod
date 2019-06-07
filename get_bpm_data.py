@@ -42,7 +42,7 @@ while True:
         elif user_input == 'provide':
             continue
 
-# Checking if temp/ dir exists/is empty
+# Checking if temp/ dir exists or is empty
 if os.path.exists(temp_dir):
     os.system("rm -r " + temp_dir + "*")
 else:
@@ -72,8 +72,8 @@ file.write(' READ "' + init_path + lattice_file + '";\n'
            '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
            '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
            '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
-           #'   ,{i, 1, Length[runs]}];\n'
-           '   ,{i, 1, 2}];\n'
+           '   ,{i, 1, Length[runs]}];\n'
+           #'   ,{i, 1, 2}];\n' # Only does two runs for debugging purposes.
            '\n'
            ' abort;\n')
 file.close()
@@ -139,8 +139,8 @@ file.write(' READ "' + init_path + lattice_file + '";\n'
            '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
            '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
            '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
-           '   ,{i, 1, 2}];\n'
-           #'   ,{i, 1, Length[runs]}];\n'
+           '   ,{i, 1, Length[runs]}];\n'
+           #'   ,{i, 1, 2}];\n' # Only does two runs for debugging purposes.
            '\n'
            # Kmodu simulation
            '! Couple quadrupole slices in the IR\n'
