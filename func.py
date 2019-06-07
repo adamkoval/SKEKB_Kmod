@@ -2,12 +2,15 @@ from __future__ import print_function
 import os
 import re
 
-def look_for_dict(init_path):
+# ====================================================
+# To be used in get_bpm_data.py
+# ====================================================
+def look_for_dict():
     """
-    Function which checks for the presence of the dict file.
+    Checks for the presence of the dict file.
     NOTE: This function does not check the format of the dictionary!
     """
-    if os.path.exists(init_path + 'file_dict.txt'):
+    if os.path.exists('file_dict.txt'):
         print('Dictionary file has been found.')
         return True
     else:
@@ -17,7 +20,7 @@ def look_for_dict(init_path):
 
 def read_pathnames():
     """
-    This function reads specifically the file 'pathnames.txt'
+    Reads specifically the file 'pathnames.txt'
     and returns a dictionary with the assigned values.
     """
     with open('pathnames.txt') as f:
@@ -32,9 +35,9 @@ def read_pathnames():
     return pathnames
 
 
-def generic_dict(data_input_dir, ringID, init_path):
+def generic_dict(data_input_dir, ringID):
     """
-    Function for creating a generic file_dict.txt file given
+    Creates a generic file_dict.txt file given
     only the input data files and the ring for which one
     wishes to create a file_dict.txt.
     """
@@ -43,7 +46,7 @@ def generic_dict(data_input_dir, ringID, init_path):
         if file.endswith('.data') and file.startswith(ringID):
             files.append(file)
 
-    fd = open(init_path + 'file_dict.txt', 'w')
+    fd = open('file_dict.txt', 'w')
     fd.write('{\n')
     for i, file in enumerate(files):
         before = data_input_dir + file
@@ -54,3 +57,61 @@ def generic_dict(data_input_dir, ringID, init_path):
             fd.write('    {"' + before + '", "' + after + '"}\n')
     fd.write('}\n')
     fd.close()
+
+
+# ====================================================
+# To be used in async.py
+# ====================================================
+def phase(datapath, axis):
+    """
+    Reads getphase*.out and returns required columns as arrays.
+    """
+    with open(datapath + 'getphase' + axis + '.out') as f:
+        lines=f.readlines()
+    S1 = [float(lines[10+i].split()[0]) for i in range(len(lines[10:]))]
+    S2 = [float(lines[10+i].split()[4]) for i in range(len(lines[10:]))]
+    Sall = np.hstack([S1, S2[-1]])
+    name1 = [lines[10+i].split()[2] for i in range(len(lines[10:]))]
+    name2 = [lines[10+i].split()[3] for i in range(len(lines[10:]))]
+    namesall = np.hstack([name1, name2[-1]])
+    deltaph = [float(lines[10+i].split()[-1]) for i in range(len(lines[10:]))]
+    phx = [float(lines[10+i].split()[-2]) for i in range(len(lines[10:]))]
+    phxmdl = [float(lines[10+i].split()[-4]) for i in range(len(lines[10:]))]
+    Qx = float(lines[5].split()[3])
+    Qy = float(lines[6].split()[3])
+    return Sall, namesall, deltaph, phx, phxmdl, Qx, Qy
+
+def phasetot(datapath, axis):
+    """
+    Reads getphasetot*.out and returns deltaphtot array.
+    """
+    with open(datapath + 'getphasetot' + axis + '.out') as f:
+        lines = f.readlines()[8:]
+    deltaphtot = [float(lines[2+i].split()[-1]) for i in range(len(lines[2:]))]
+    return deltaphtot
+
+
+# ====================================================
+# To be used in checkBPMs.py
+# ====================================================
+def BPMs_from_sdds(sddsfile):
+    """
+    Finds the complete list of BPMs from the sdds file.
+    """
+    with open(sddsfile) as f:
+        lines = f.readlines()
+    lines = [line for line in lines if not line.startswith('#')]
+
+    BPMs = []
+    badBPMs = []
+    for line in lines:
+        if line.startswith('0'):
+            BPMs.append(line.split()[1])
+            if line.split()[3] == '.0000000000':
+                badBPMs.append(line.split()[1])
+
+    return BPMs, badBPMs
+
+def get_outofsynch(output_dir, axis):
+    files = os.listdir(output_dir + 'outofphase' + axis)
+    ##### NOT COMPLETE ##########
