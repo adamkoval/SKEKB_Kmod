@@ -24,15 +24,15 @@ data_input_dir = pathnames["data_input_dir"]
 model_dir = pathnames["model_dir"]
 
 # Output directories
-output_dir = pathnames["output_dir"]
+main_output_dir = pathnames["main_output_dir"]
 temp_dir = pathnames["temp_dir"]
-harmonic_output_dir = output_dir + pathnames["harmonic_output_dir"]
-phase_output_dir = output_dir + pathnames["phase_output_dir"]
+harmonic_output_dir = main_output_dir + pathnames["harmonic_output_dir"]
+phase_output_dir = main_output_dir + pathnames["phase_output_dir"]
 
 # Output files
-ftwissbpm = output_dir + pathnames["ftwissbpm"]
-ftwissall = output_dir + pathnames["ftwissall"]
-fkmodu = output_dir + pathnames["fkmodu"]
+ftwissbpm = main_output_dir + pathnames["ftwissbpm"]
+ftwissall = main_output_dir + pathnames["ftwissall"]
+fkmodu = main_output_dir + pathnames["fkmodu"]
 
 # Checking for a dictionary
 while True:
@@ -47,10 +47,10 @@ while True:
             continue
 
 # Checking if temp/ and output/ dirs exist or are empty
-if os.path.exists(output_dir):
-    os.system("rm -r " + output_dir + "*")
+if os.path.exists(main_output_dir):
+    os.system("rm -r " + main_output_dir + "*")
 else:
-    os.system("mkdir " + output_dir)
+    os.system("mkdir " + main_output_dir)
 
 if os.path.exists(temp_dir):
     os.system("rm -r " + temp_dir + "*")
@@ -120,7 +120,7 @@ for axis in ['x', 'y']:
     p = Popen([python_exe,
                'async.py',
                '--phase_output_dir', phase_output_dir,
-               '--async_output_dir', output_dir + 'outofphase' + axis + '/',
+               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
                '--axis', axis])
     p.wait()
 
@@ -157,7 +157,7 @@ file.write(' READ "' + lattice_dir + lattice_file + '";\n'
            ' runs = Get["file_dict.txt"];\n'
            ' Do[\n'
            '   fnr1 = "./"//runs[i, 1];\n'
-           '   fbpm = "' + output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.
+           '   fbpm = "' + main_output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.
            '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
            '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
            '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
