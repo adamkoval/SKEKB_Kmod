@@ -121,6 +121,13 @@ p = Popen([python_exe,
            '--async_output_dir', output_dir + 'outofphasex/',
            '--axis', 'x'])
 p.wait()
+
+# ==================================================
+# 
+# PLACE checkBPMs.py HERE
+#
+# ==================================================
+
 print(" *******************************\n",
       "Asynchronous BPMs found, converting raw -> sdds with synch fix.\n",
       "*******************************")

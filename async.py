@@ -7,28 +7,38 @@ from __future__ import print_function
 import sys
 import os
 import numpy as np
-import optparse
+import argparse
 from func import phase, phasetot
 
-parser = optparse.OptionParser()
-parser.add_option('--phase_output_dir', action="store", dest="phase_output_dir")
-parser.add_option('--async_output_dir', action="store", dest="async_output_dir")
-parser.add_option('--axis', action="store", dest="axis")
-options, args = parser.parse_args()
+# Argument parser.
+parser = argparse.ArgumentParser()
+parser.add_argument('--phase_output_dir',
+                    dest="phase_output_dir",
+                    action="store")
+parser.add_argument('--async_output_dir',
+                    dest="async_output_dir",
+                    action="store")
+parser.add_argument('--axis',
+                    dest="axis",
+                    action="store")
+args = parser.parse_args()
 
-if not os.path.exists(options.phase_output_dir):
-    print("Directory", options.phase_output_dir, "not found.")
+# Check if phase output directory exists, if not, exit.
+if not os.path.exists(args.phase_output_dir):
+    print("Directory", args.phase_output_dir, "not found.")
     sys.exit()
-if not os.path.exists(options.async_output_dir):
-    os.system("mkdir " + options.async_output_dir)
+# Check if output dir for the present script exists, if not, create one.
+if not os.path.exists(args.async_output_dir):
+    os.system("mkdir " + args.async_output_dir)
 
-for run in os.listdir(options.phase_output_dir):
-    datapath = options.phase_output_dir + run + '/'
+# Check for asynchronous BPMs in each measurement reun using phase output.
+for run in os.listdir(args.phase_output_dir):
+    datapath = args.phase_output_dir + run + '/'
     try:
-        S, names, deltaph, phx, phxmdl, Qx, Qy = phase(datapath, options.axis)
+        S, names, deltaph, phx, phxmdl, Qx, Qy = phase(datapath, args.axis)
     except IOError:
         continue
-    deltaphtot = phasetot(datapath, options.axis)
+    deltaphtot = phasetot(datapath, args.axis)
 
     level = []
     for i in range(len(deltaphtot)):
@@ -38,7 +48,7 @@ for run in os.listdir(options.phase_output_dir):
             level.append('+1')
         elif deltaphtot[i] / Qx > -.5 and deltaphtot[i] / Qx < .5:
             level.append('0')
-    file = open(options.async_output_dir + run + '.txt', 'w')
+    file = open(args.async_output_dir + run + '.txt', 'w')
     file.write('{\n')
     g = 0
     try:
