@@ -60,3 +60,7 @@
 	* pathnames.txt:
 	[changed]
 	- Changed name of output_dir to main_output_dir
+
+	* checkBPMs.py:
+	[added]
+	- Wrote the main portion of the script which will display the BPM fix schematic.

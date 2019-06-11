@@ -114,7 +114,7 @@ def BPMs_from_sdds(sddsfile):
     return BPMs, badBPMs
 
 
-def get_all_outofsynch(output_dir, axis):
+def get_all_outofsynch(async_output_dir):
     """
     Creates a dictionary with keys corresponding to the
     <run>.txt filename of the measurement run, as
@@ -123,10 +123,10 @@ def get_all_outofsynch(output_dir, axis):
     out-of-synch values, as stated in the respective
     outofsynch/<file>.txt file.
     """
-    files = os.listdir(output_dir + 'outofphase' + axis)
+    files = os.listdir(async_output_dir)
     all_outofsynch = {}
-    for i, ef in enumerate(files):
-        with open('outofphase' + axis + '/' + ef) as f:
+    for i, fn in enumerate(files):
+        with open(async_output_dir + fn) as f:
             column = f.readlines()
         del column[-1]
         del column[0]
@@ -147,8 +147,8 @@ def get_dict(dictionary, file):
         for key_entry in dictionary[file]:
             info.append(re.search(pattern, key_entry).group(1))
         return info
-    names = get_info("\"([A-Z0-9]+)\"\S*")
-    asynchs = get_info("\-\>([\+\-]*[0-9])")
+    names = get_info('\"([A-Z0-9]+)\"\S*')
+    asynchs = get_info('\-\>([\+\-]*[0-9])')
     Dict = {}
     for i in range(len(names)):
         Dict[names[i]] = asynchs[i]
