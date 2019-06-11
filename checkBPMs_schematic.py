@@ -4,6 +4,7 @@ Author: Adam Koval
 """
 from __future__ import print_function
 import os
+import sys
 import argparse
 import pandas
 import matplotlib.pyplot as plt
@@ -33,14 +34,19 @@ parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
 
+# Definitions
+axis = args.axis
+sdds_dir = args.sdds_dir
+async_output_dir = args.main_output_dir + args.async_output_dir
+
 # List all BPMs from any sdds file.
-BPM_list = BPMs_from_sdds(args.sdds_dir + os.listdir(args.sdds_dir)[0])[0]
+BPM_list = BPMs_from_sdds(sdds_dir + os.listdir(sdds_dir)[0])[0]
 
 # Get a dictionary of all files from outofsynch dir.
-all_outofsynch = get_all_outofsynch(args.main_output_dir + args.async_output_dir)
+all_outofsynch = get_all_outofsynch(async_output_dir)
 
 # List all files in outofphase*/ dir.
-file_list = os.listdir(args.main_output_dir + args.async_output_dir)
+file_list = os.listdir(async_output_dir)
 
 # Create dataframe for plotting.
 df = {}
@@ -92,10 +98,10 @@ custom_legend = [Line2D([0], [0], marker='o', color=[0., 1., .5], alpha=.5, labe
                  Line2D([0], [0], marker='o', color=[.5, .5, .5], alpha=.5, label='no data')]
 
 ax1.legend(handles=custom_legend, bbox_to_anchor=(1, 1))
-plt.title('Asynchronous BPMs in the ' + args.axis + '-axis from T-b-T data', y=1.02)
+plt.title('Asynchronous BPMs in the ' + axis + '-axis from T-b-T data', y=1.02)
 
 if args.save == True:
-    plt.savefig('Asynchronous_BPMs_' + args.axis + 'axis.png', format='png')
+    plt.savefig('Asynchronous_BPMs_' + axis + 'axis.png', format='png')
 
 plt.show()
 
