@@ -61,6 +61,7 @@ x_posn = [i for i in range(row_length)]
 
 print("Ready to plot")
 
+# Plot.
 fig = plt.figure(figsize=(17, 11))
 ax1 = fig.add_subplot(111)
 plt.subplots_adjust(top=.84)
