@@ -98,3 +98,5 @@ if args.save == True:
     plt.savefig('Asynchronous_BPMs_' + args.axis + 'axis.png', format='png')
 
 plt.show()
+
+sys.exit()
