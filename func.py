@@ -172,7 +172,7 @@ def get_data_column(phase_output_dir, folder, data, column):
     Obtain desired data column from measurement run in phase
     output dir as an array.
     """
-    with open(phase_output_dir + '/' + folder + '/' + data) as f:
+    with open(phase_output_dir + folder + '/' + data) as f:
         lines = f.readlines()
     rows = [line for line in lines if line.split()[0] not in ['@', '*', '$']]
     headers, = [line for line in lines if line.split()[0] == '*']

@@ -65,9 +65,16 @@
 	[changed]
 	- Changed name of output_dir to main_output_dir
 
-	* checkBPMs.py:
+	* checkBPMs_schematic.py:
 	[added]
 	- Wrote the main portion of the script which will display the BPM fix schematic.
+	- sys.exit() command at the end.
 	[changed]
 	- Changed references to func get_dict to get_dict_schematic, in accordance with
 	change within func.py.
+	- Changed name to checkBPMs_schematic.py.
+	- Changed some definitions.
+
+	* checkBPMs_colormap.py:
+	[added]
+	- Main script.
