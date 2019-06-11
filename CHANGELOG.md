@@ -34,15 +34,19 @@
 	pod and aod resp..
 	[added]
 	- Added abbreviated/short arg options.
+	- Comments.
 
 	* run_BetaBeatsrc.py:
 	[changed]
 	- Changed the argument parser from optparse (deprecated) to argparse.
+	- Changed naming of variables phase_output_dir and harmonic_output_dir
+	to pod and hod resp..
+	[added]
+	- Added abbreviated/short arg options.
+	- Comments.
 
 	* get_bpm_data.py:
 	[fixed]
 	- run.sad was not reading in async BPM list specific to each run, but
 	was instead looking for a single file called BPMlist.txt in dir lattice/.
-	This has been fixed.
-
-	* 
+	This has been fixed. 
