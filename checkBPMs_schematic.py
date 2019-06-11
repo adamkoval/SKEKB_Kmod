@@ -11,12 +11,6 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from func import BPMs_from_sdds, get_all_outofsynch, get_dict_schematic
 
-# Argument parser.
-# TEMPORARY NOTE:
-#   --axis <axis>
-#   -aod outofphase + <axis> + /
-#   -mod output/
-#   -sd temp/
 parser = argparse.ArgumentParser()
 parser.add_argument('--axis', '-ax',
                     dest='axis',
