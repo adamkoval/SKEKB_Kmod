@@ -12,28 +12,28 @@ from func import phase, phasetot
 
 # Argument parser.
 parser = argparse.ArgumentParser()
-parser.add_argument('--phase_output_dir',
-                    dest="phase_output_dir",
+parser.add_argument('--phase_output_dir', '-pod',
+                    dest="pod",
                     action="store")
-parser.add_argument('--async_output_dir',
-                    dest="async_output_dir",
+parser.add_argument('--async_output_dir', '-aod',
+                    dest="aod",
                     action="store")
-parser.add_argument('--axis',
+parser.add_argument('--axis', '-ax',
                     dest="axis",
                     action="store")
 args = parser.parse_args()
 
 # Check if phase output directory exists, if not, exit.
-if not os.path.exists(args.phase_output_dir):
-    print("Directory", args.phase_output_dir, "not found.")
+if not os.path.exists(args.pod):
+    print("Directory", args.pod, "not found.")
     sys.exit()
 # Check if output dir for the present script exists, if not, create one.
-if not os.path.exists(args.async_output_dir):
-    os.system("mkdir " + args.async_output_dir)
+if not os.path.exists(args.aod):
+    os.system("mkdir " + args.aod)
 
 # Check for asynchronous BPMs in each measurement reun using phase output.
-for run in os.listdir(args.phase_output_dir):
-    datapath = args.phase_output_dir + run + '/'
+for run in os.listdir(args.pod):
+    datapath = args.pod + run + '/'
     try:
         S, names, deltaph, phx, phxmdl, Qx, Qy = phase(datapath, args.axis)
     except IOError:
@@ -48,7 +48,7 @@ for run in os.listdir(args.phase_output_dir):
             level.append('+1')
         elif deltaphtot[i] / Qx > -.5 and deltaphtot[i] / Qx < .5:
             level.append('0')
-    file = open(args.async_output_dir + run + '.txt', 'w')
+    file = open(args.aod + run + '.txt', 'w')
     file.write('{\n')
     g = 0
     try:

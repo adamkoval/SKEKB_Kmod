@@ -113,14 +113,16 @@ print(" *******************************\n",
       "*******************************")
 
 # Asynch analysis
-# NOTE: This analysis is being run for the x-axis as this one has been found to
-#       have cleaner results.
-p = Popen([python_exe,
-           'async.py',
-           '--phase_output_dir', phase_output_dir,
-           '--async_output_dir', output_dir + 'outofphasex/',
-           '--axis', 'x'])
-p.wait()
+# NOTE: This analysis is being run for both axes, but the x-axis is used
+#       in run.sad (generated below) as this one has been found to have 
+#       cleaner results.
+for axis in ['x', 'y']:
+    p = Popen([python_exe,
+               'async.py',
+               '--phase_output_dir', phase_output_dir,
+               '--async_output_dir', output_dir + 'outofphase' + axis + '/',
+               '--axis', axis])
+    p.wait()
 
 # ==================================================
 # 
@@ -155,7 +157,7 @@ file.write(' READ "' + lattice_dir + lattice_file + '";\n'
            ' runs = Get["file_dict.txt"];\n'
            ' Do[\n'
            '   fnr1 = "./"//runs[i, 1];\n'
-           '   fbpm = "' + output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n'
+           '   fbpm = "' + output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.
            '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
            '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
            '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'

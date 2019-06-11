@@ -13,6 +13,9 @@ parser.add_argument('--axis', '-ax',
 parser.add_argument('--async_output_dir',
                     dest='aod',
                     action='store')
+parser.add_argument('--phase_output_dir',
+                    dest='pod',
+                    action='store')
 args = parser.parse_args()
 
 # All else
