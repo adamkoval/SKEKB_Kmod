@@ -55,7 +55,11 @@
 
 	* func.py:
 	[added]
-	- Added the function get_dict().
+	- The function get_dict().
+	- The function get_dict_colormap().
+	- The function get_data_column().
+	[changed]
+	- Name of get_dict() for get_dict_schematic().
 
 	* pathnames.txt:
 	[changed]
@@ -64,3 +68,6 @@
 	* checkBPMs.py:
 	[added]
 	- Wrote the main portion of the script which will display the BPM fix schematic.
+	[changed]
+	- Changed references to func get_dict to get_dict_schematic, in accordance with
+	change within func.py.

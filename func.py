@@ -93,7 +93,7 @@ def phasetot(datapath, axis):
 
 
 # ====================================================
-# To be used in checkBPMs.py
+# To be used in checkBPMs*.py
 # ====================================================
 def BPMs_from_sdds(sddsfile):
     """
@@ -134,7 +134,7 @@ def get_all_outofsynch(async_output_dir):
     return all_outofsynch
 
 
-def get_dict(dictionary, file):
+def get_dict_schematic(dictionary, file):
     """
     For the file with name <file>, returns a dictionary
     of keys corresponding to each BPM in that file, and
@@ -153,3 +153,34 @@ def get_dict(dictionary, file):
     for i in range(len(names)):
         Dict[names[i]] = asynchs[i]
     return Dict
+
+
+def get_dict_colormap(names, phases):
+    """
+    Given an array of BPM names and their respective
+    phases, returns a dictionary with BPM name keys
+    and phase advance entries.
+    """
+    Dict = {}
+    for i in range(len(names)):
+        Dict[names[i]] = phases[i]
+    return Dict
+
+
+def get_data_column(phase_output_dir, folder, data, column):
+    """
+    Obtain desired data column from measurement run in phase
+    output dir as an array.
+    """
+    with open(phase_output_dir + '/' + folder + '/' + data) as f:
+        lines = f.readlines()
+    rows = [line for line in lines if line.split()[0] not in ['@', '*', '$']]
+    headers, = [line for line in lines if line.split()[0] == '*']
+    headers = headers.split()[1:]
+    all_dat = {}
+    for i in range(len(headers)):
+        if headers[i] in ['NAME', 'NAME2']:
+            all_dat[headers[i]] = [rows[j].split()[i] for j in range(len(rows))]
+        else:
+            all_dat[headers[i]] = [float(rows[j].split()[i]) for j in range(len(rows))]
+    return all_dat[column]
