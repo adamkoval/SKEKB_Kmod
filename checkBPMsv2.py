@@ -10,10 +10,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--axis', '-ax',
                     dest='axis',
                     action='store')
-parser.add_argument('--async_output_dir',
+parser.add_argument('--async_output_dir', '-aod',
                     dest='aod',
                     action='store')
-parser.add_argument('--phase_output_dir',
+parser.add_argument('--phase_output_dir', '-pod',
                     dest='pod',
                     action='store')
 args = parser.parse_args()

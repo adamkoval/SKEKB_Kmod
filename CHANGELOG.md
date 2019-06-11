@@ -49,4 +49,8 @@
 	[fixed]
 	- run.sad was not reading in async BPM list specific to each run, but
 	was instead looking for a single file called BPMlist.txt in dir lattice/.
-	This has been fixed. 
+	This has been fixed.
+
+	* func.py:
+	[added]
+	- Added the function get_dict(). 

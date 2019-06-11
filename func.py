@@ -81,6 +81,7 @@ def phase(datapath, axis):
     Qy = float(lines[6].split()[3])
     return Sall, namesall, deltaph, phx, phxmdl, Qx, Qy
 
+
 def phasetot(datapath, axis):
     """
     Reads getphasetot*.out and returns deltaphtot array.
@@ -112,6 +113,43 @@ def BPMs_from_sdds(sddsfile):
 
     return BPMs, badBPMs
 
-def get_outofsynch(output_dir, axis):
+
+def get_all_outofsynch(output_dir, axis):
+    """
+    Creates a dictionary with keys corresponding to the
+    <run>.txt filename of the measurement run, as
+    given in file_dict.txt, and each entry containing
+    the list of BPMs along with their integer
+    out-of-synch values, as stated in the respective
+    outofsynch/<file>.txt file.
+    """
     files = os.listdir(output_dir + 'outofphase' + axis)
-    ##### NOT COMPLETE ##########
+    all_outofsynch = {}
+    for i, ef in enumerate(files):
+        with open('outofphase' + axis + '/' + ef) as f:
+            column = f.readlines()
+        del column[-1]
+        del column[0]
+        all_outofsynch[files[i]] = column
+    return all_outofsynch
+
+
+def get_dict(dictionary, file):
+    """
+    For the file with name <file>, returns a dictionary
+    of keys corresponding to each BPM in that file, and
+    key entries consisting of the status of that BPM as
+    a string:
+    '+1', '0' or '-1'.
+    """
+    def get_info(pattern):
+        info = []
+        for key_entry in dictionary[file]:
+            info.append(re.search(pattern, key_entry).group(1))
+        return info
+    names = get_info("\"([A-Z0-9]+)\"\S*")
+    asynchs = get_info("\-\>([\+\-]*[0-9])")
+    Dict = {}
+    for i in range(len(names)):
+        Dict[names[i]] = asynchs[i]
+    return Dict
