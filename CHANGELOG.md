@@ -78,3 +78,18 @@
 	* checkBPMs_colormap.py:
 	[added]
 	- Main script.
+
+
+2019-06-12	Adam Koval	adam.koval@cern.ch
+
+	* checkBPMs_schematic.py:
+	[changed]
+	- Formatting.
+
+	* checkBPMs_colormap.py:
+	[changed]
+	- Formatting.
+
+	* get_bpm_data.py:
+	[added]
+	- checkBPMs_colormap/schematic.py functionality. (UNFINISHED)

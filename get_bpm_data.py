@@ -130,6 +130,10 @@ for axis in ['x', 'y']:
 #
 # ==================================================
 
+#    p = Popen([python_exe,
+#               'checkBPMs_schematic.py',
+#               '--axis', axis
+
 print(" *******************************\n",
       "Asynchronous BPMs found, converting raw -> sdds with synch fix.\n",
       "*******************************")

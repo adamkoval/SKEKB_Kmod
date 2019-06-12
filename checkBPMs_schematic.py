@@ -29,19 +29,19 @@ parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
 
-# Definitions
+# Definitions.
 axis = args.axis
 sdds_dir = args.sdds_dir
 async_output_dir = args.main_output_dir + args.async_output_dir
+
+# List all files in outofphase*/ dir.
+file_list = os.listdir(async_output_dir)
 
 # List all BPMs from any sdds file.
 BPM_list = BPMs_from_sdds(sdds_dir + os.listdir(sdds_dir)[0])[0]
 
 # Get a dictionary of all files from outofsynch dir.
 all_outofsynch = get_all_outofsynch(async_output_dir)
-
-# List all files in outofphase*/ dir.
-file_list = os.listdir(async_output_dir)
 
 # Create dataframe for plotting.
 df = {}
