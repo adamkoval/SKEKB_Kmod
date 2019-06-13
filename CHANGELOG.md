@@ -105,3 +105,6 @@
 	[changed]
 	- Destination for output .png figures.
 
+	* get_bpm_data.py:
+	[added]
+	- checkBPMs_colormap/schematic.py functionality.
