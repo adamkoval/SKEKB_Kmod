@@ -112,3 +112,7 @@
 	* run_BetaBeatsrc.py:
 	[fixed]
 	- add_option to add_argument, in accordance with argparse.
+
+	* func.py:
+	[fixed]
+	- no "numpy as np" import.

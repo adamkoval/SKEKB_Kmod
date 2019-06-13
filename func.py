@@ -1,6 +1,7 @@
 from __future__ import print_function
 import os
 import re
+import numpy as np
 
 # ====================================================
 # To be used in get_bpm_data.py
