@@ -130,7 +130,7 @@ for axis in ['x', 'y']:
                'checkBPMs_schematic.py',
                '--axis', axis,
                '--sdds_dir', temp_dir,
-               '--async_output_dir', phase_output_dir,
+               '--async_output_dir', async_output_dir,
                '--main_output_dir', main_output_dir,
                '--save'])
     p.wait()
