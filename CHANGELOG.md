@@ -93,3 +93,15 @@
 	* get_bpm_data.py:
 	[added]
 	- checkBPMs_colormap/schematic.py functionality. (UNFINISHED)
+
+
+2019-06-13	Adam Koval	adam.koval@cern.ch
+
+	* checkBPMs_schematic.py:
+	[changed]
+	- Destination for output .png figures.
+
+	* checkBPMs_colormap.py:
+	[changed]
+	- Destination for output .png figures.
+

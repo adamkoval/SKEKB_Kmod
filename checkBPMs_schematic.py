@@ -33,6 +33,7 @@ args = parser.parse_args()
 axis = args.axis
 sdds_dir = args.sdds_dir
 async_output_dir = args.main_output_dir + args.async_output_dir
+main_output_dir = args.main_output_dir
 
 # List all files in outofphase*/ dir.
 file_list = os.listdir(async_output_dir)
@@ -96,7 +97,7 @@ ax1.legend(handles=custom_legend, bbox_to_anchor=(1, 1))
 plt.title('Asynchronous BPMs in the ' + axis + '-axis from T-b-T data', y=1.02)
 
 if args.save == True:
-    plt.savefig('Asynchronous_BPMs_' + axis + 'axis.png', format='png')
+    plt.savefig(main_output_dir + 'Asynchronous_BPMs_' + axis + 'axis.png', format='png')
 
 plt.show()
 

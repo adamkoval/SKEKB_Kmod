@@ -35,6 +35,7 @@ axis = args.axis
 AXIS = axis.capitalize()
 sdds_dir = args.sdds_dir
 phase_output_dir = args.main_output_dir + args.phase_output_dir
+main_output_dir = args.main_output_dir
 data = 'getphasetot' + axis + '.out'
 
 # List all files in phase_output_dir.
@@ -95,10 +96,10 @@ ax.set_yticks([i+.5 for i in y_posn])
 ax.set_yticklabels([i[:-4] for i in df.columns.tolist()])
 ax.set_xlabel('BPM')
 ax.set_ylabel('Measurement run')
-plt.title('SuperKEKB BPM performance from T-b-T data ('+axis+'-axis)')
+plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis)')
 
 if args.save == True:
-    plt.savefig('colourmap_Asynchronous_BPMs_'+axis+'axis.png', format = 'png')
+    plt.savefig(main_output_dir + 'colourmap_Asynchronous_BPMs_' + axis + 'axis.png', format = 'png')
 
 plt.show()
 
