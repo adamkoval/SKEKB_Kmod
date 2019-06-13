@@ -105,6 +105,7 @@
 	as this was already compensated for in get_bpm_data.py
 	[added]
 	- Script completion message at the end.
+	- Argument option to display plot.
 
 	* checkBPMs_colormap.py:
 	[changed]
@@ -115,6 +116,7 @@
 	- Trying to obtain DELTAPHASEX even for y-axis.
 	[added]
 	- Script completion message at the end.
+	- Argument option to display plot.
 
 	* get_bpm_data.py:
 	[added]

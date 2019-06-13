@@ -26,6 +26,8 @@ parser.add_argument('--main_output_dir', '-mod',
 parser.add_argument('--sdds_dir', '-sd',
                     dest='sdds_dir',
                     action='store')
+parser.add_argument('--display', '-d',
+                    action='store_true')
 parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
@@ -100,8 +102,8 @@ plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis)')
 
 if args.save == True:
     plt.savefig(main_output_dir + 'colourmap_Asynchronous_BPMs_' + axis + 'axis.png', format = 'png')
-
-plt.show()
+if args.sidplay == True:
+    plt.show()
 
 print(" *******************************\n",
       "checkBPMs_colormap.py: Script made it to the end, moving on...\n",
