@@ -121,6 +121,7 @@
 	* get_bpm_data.py:
 	[added]
 	- checkBPMs_colormap/schematic.py functionality (BEFORE DEBUG).
+	- checkBPMs_colormap/schematic.py after the fix has been applied.
 	[fixed]
 	- Incorrect argument passed to checkBPMs_schematic.py for async_output_dir.
 

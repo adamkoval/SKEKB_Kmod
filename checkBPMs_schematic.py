@@ -27,6 +27,8 @@ parser.add_argument('--sdds_dir', '-sd',
                     action='store')
 parser.add_argument('--display', '-d',
                     action='store_true')
+parser.add_argument('--when',
+                    choices=['before', 'after'])
 parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
@@ -79,9 +81,9 @@ for i in range(column_length):
             ax1.plot(x_posn[j], y_posn[i], 'o', color=[1., 0., 0.], alpha=.5, label='-1Q asynch')
         elif df[file_list[i]][j] == '~':
             ax1.plot(x_posn[j], y_posn[i], 'o', color=[.5, .5, .5], alpha=.5, label='no data')
-    if i%3 == 0 and i != 0:
-        print(str("{0:.1f}".format(i/column_length*100))+'%')
-        ax1.axhline(y_posn[i]-.5, ls='--', lw=.5)
+#    if i%3 == 0 and i != 0:
+#        print(str("{0:.1f}".format(i/column_length*100))+'%')
+#        ax1.axhline(y_posn[i]-.5, ls='--', lw=.5)
 
 ax1.set_xticks([i for i in range(row_length)])
 ax1.set_xticklabels(BPM_list, rotation='vertical')
@@ -96,15 +98,19 @@ custom_legend = [Line2D([0], [0], marker='o', color=[0., 1., .5], alpha=.5, labe
                  Line2D([0], [0], marker='o', color=[.5, .5, .5], alpha=.5, label='no data')]
 
 ax1.legend(handles=custom_legend, bbox_to_anchor=(1, 1))
-plt.title('Asynchronous BPMs in the ' + axis + '-axis from T-b-T data', y=1.02)
+plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when + ')', y=1.02)
 
 if args.save == True:
-    plt.savefig(main_output_dir + 'Asynchronous_BPMs_' + axis + 'axis.png', format='png')
+    plt.savefig(main_output_dir
+                + 'Asynchronous_BPMs_schematic_'
+                + axis + 'axis_' + args.when + '.png',
+                format='png')
 if args.display == True:
     plt.show()
 
-print(" *******************************\n",
-      "checkBPMs_schematic.py: Script made it to the end, moving on...\n",
-      "*******************************")
+print(" ********************************************\n",
+      "checkBPMs_schematic.py:\n",
+      '"Script made it to the end, moving on..."\n',
+      "********************************************")
 
 sys.exit()

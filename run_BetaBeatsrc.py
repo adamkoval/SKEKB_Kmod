@@ -39,8 +39,12 @@ if len(os.listdir(args.pod)) != 0:
     os.system("rm -r " + args.pod + "/*")
 
 # Run Beta-Beat.src srcripts in succession:
-for run in os.listdir(args.sdds_dir):
-    print("working on file", run)
+sdds_files = os.listdir(args.sdds_dir)
+for i, run in enumerate(sdds_files):
+    print(" ********************************************\n",
+          "run_BetaBeatsrc.py:\n",
+          '"Working on file ' + str(i) + '/' + str(len(sdds_files)) + ': ' + str(run) + '"\n',
+          "********************************************")
 
     # hole_in_one.py
     p = Popen([args.python_exe,

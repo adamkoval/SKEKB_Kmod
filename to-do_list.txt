@@ -1,9 +1,9 @@
 TO-DO:
+	[general]
 	* Improve README.md
 	* Possibly add options to utilise various functions of the script, rather than all of them at once.
+	[asynch plots]
 	* Improve title placement of asynch plots.
 	* Fix horiz size of cmap plot.
-	* Remove hlines in asynch plots.
-	* Add progress numbers in run_BetaBeatsrc.py.
-	* Add timers for each section, and total time.
-	* Do asynch analysis after resync as well.
+	[get_bpm_data.py]
+	* Add timers for each section, and total time.	

@@ -28,6 +28,8 @@ parser.add_argument('--sdds_dir', '-sd',
                     action='store')
 parser.add_argument('--display', '-d',
                     action='store_true')
+parser.add_argument('--when',
+                    choices=['before', 'after'])
 parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
@@ -88,9 +90,9 @@ plt.pcolormesh(X, Y, Z, cmap = cm)
 bar = plt.colorbar()
 bar.set_label('$\Delta\ \phi$ [2$\pi$]')
 
-for i in range(column_length):
-    if i%3 == 0 and i != 0:
-        ax.axhline(y_posn[i], ls='--', lw=1)
+#for i in range(column_length):
+#    if i%3 == 0 and i != 0:
+#        ax.axhline(y_posn[i], ls='--', lw=1)
 
 ax.set_xticks([i for i in range(row_length)])
 ax.set_xticklabels(BPM_list, rotation='vertical')
@@ -98,15 +100,19 @@ ax.set_yticks([i+.5 for i in y_posn])
 ax.set_yticklabels([i[:-4] for i in df.columns.tolist()])
 ax.set_xlabel('BPM')
 ax.set_ylabel('Measurement run')
-plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis)')
+plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when  + ')')
 
 if args.save == True:
-    plt.savefig(main_output_dir + 'colourmap_Asynchronous_BPMs_' + axis + 'axis.png', format = 'png')
-if args.sidplay == True:
+    plt.savefig(main_output_dir
+                + 'Asynchronous_BPMs_colourmap_'
+                + axis + 'axis_' + args.when  +  '.png',
+                format = 'png')
+if args.display == True:
     plt.show()
 
-print(" *******************************\n",
-      "checkBPMs_colormap.py: Script made it to the end, moving on...\n",
-      "*******************************")
+print(" ********************************************\n",
+      "checkBPMs_colormap.py:\n",
+      '"Script made it to the end, moving on..."\n',
+      "********************************************")
 
 sys.exit()

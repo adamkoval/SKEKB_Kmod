@@ -7,8 +7,8 @@ import sys
 from subprocess import Popen
 from func import read_pathnames, look_for_dict, generic_dict
 
-# Debug mode
-debug = 'no'
+# Debug mode => 'yes' or 'no' ('no' does nothing)
+debug = 'yes'
 
 # Read in destinations
 pathnames = read_pathnames()
@@ -97,9 +97,10 @@ file.write(' READ "' + lattice_dir + lattice_file + '";\n'
 file.close()
 
 os.system(gsad + " prerun.sad")
-print(" *******************************\n",
-      "prerun.sad finished, running analysis script.\n",
-      "*******************************")
+print(" ********************************************\n",
+      "get_bpm_data.py:\n",
+      '"prerun.sad finished, running analysis script."\n',
+      "********************************************")
 
 # Beta-Beat.src analysis
 p = Popen([python_exe,
@@ -111,11 +112,12 @@ p = Popen([python_exe,
            '--harmonic_output_dir', harmonic_output_dir,
            '--phase_output_dir', phase_output_dir])
 p.wait()
-print(" *******************************\n",
-      "Beta-Beat.src analysis finished, checking asynchronous BPMs.\n",
-      "*******************************")
+print(" ********************************************\n",
+      "get_bpm_data.py:\n",
+      '"Beta-Beat.src analysis finished, checking asynchronous BPMs."\n',
+      "********************************************")
 
-# Asynch analysis
+# Asynch analysis before
 # NOTE: This analysis is being run for both axes, but the x-axis is used
 #       in run.sad (generated below) as this one has been found to have 
 #       cleaner results.
@@ -135,6 +137,7 @@ for axis in ['x', 'y']:
                '--sdds_dir', temp_dir,
                '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
                '--main_output_dir', main_output_dir,
+               '--when', 'before',
                '--save'])
     p.wait()
 
@@ -145,12 +148,14 @@ for axis in ['x', 'y']:
                '--sdds_dir', temp_dir,
                '--phase_output_dir', phase_output_dir,
                '--main_output_dir', main_output_dir,
+               '--when', 'before',
                '--save'])
     p.wait()
 
-print(" *******************************\n",
-      "Asynchronous BPMs found, converting raw -> sdds with synch fix.\n",
-      "*******************************")
+print(" ********************************************\n",
+      "get_bpm_data.py:\n",
+      '"Asynchronous BPMs found, converting raw -> sdds with synch fix."\n',
+      "********************************************")
 
 # Conversion with asynch knowledge + KModu simulation
 file = open("run.sad", "w")
@@ -207,9 +212,10 @@ file.write(' READ "' + lattice_dir + lattice_file + '";\n'
 file.close()
 
 os.system(gsad + " run.sad");
-print(" *******************************\n",
-      "run.sad finished, running analysis script.\n",
-      "*******************************")
+print(" ********************************************\n",
+      "get_bpm_data.py:\n",
+      '"run.sad finished, running analysis script."\n',
+      "********************************************")
 
 # Beta-Beat.src analysis
 p = Popen([python_exe,
@@ -221,8 +227,44 @@ p = Popen([python_exe,
            '--harmonic_output_dir', harmonic_output_dir,
            '--phase_output_dir', phase_output_dir])
 p.wait()
-print(" *******************************\n",
-      "Beta-Beat.src analysis finished, data is ready.\n"
-      "*******************************")
+print(" ********************************************\n",
+      "get_bpm_data.py:\n",
+      '"Beta-Beat.src analysis finished, running async analysis again."\n',
+      "********************************************")
+
+# Asynch analysis after
+# NOTE: This analysis is being run for both axes, but the x-axis is used
+#       in run.sad (generated below) as this one has been found to have 
+#       cleaner results.
+for axis in ['x', 'y']:
+    # async.py
+    p = Popen([python_exe,
+               'async.py',
+               '--phase_output_dir', phase_output_dir,
+               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
+               '--axis', axis])
+    p.wait()
+
+    # checkBPMs_schematic.py
+    p = Popen([python_exe,
+               'checkBPMs_schematic.py',
+               '--axis', axis,
+               '--sdds_dir', temp_dir,
+               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
+               '--main_output_dir', main_output_dir,
+               '--when', 'after',
+               '--save'])
+    p.wait()
+
+    # checkBPMs_colormap.py
+    p = Popen([python_exe,
+               'checkBPMs_colormap.py',
+               '--axis', axis,
+               '--sdds_dir', temp_dir,
+               '--phase_output_dir', phase_output_dir,
+               '--main_output_dir', main_output_dir,
+               '--when', 'after',
+               '--save'])
+    p.wait()
 
 sys.exit()
