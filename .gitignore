@@ -12,9 +12,7 @@ twiss_all.dat
 
 # Ignoring all output dirs
 temp/
-harmonic_output/
-phase_output/
-outofphasex/
+output/
 
 # Ignoring temporary dev dir
 asynch/
