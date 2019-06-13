@@ -32,7 +32,7 @@ args = parser.parse_args()
 # Definitions.
 axis = args.axis
 sdds_dir = args.sdds_dir
-async_output_dir = args.main_output_dir + args.async_output_dir
+async_output_dir = args.async_output_dir
 main_output_dir = args.main_output_dir
 
 # List all files in outofphase*/ dir.

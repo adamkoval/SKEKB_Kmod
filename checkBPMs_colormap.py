@@ -34,7 +34,7 @@ args = parser.parse_args()
 axis = args.axis
 AXIS = axis.capitalize()
 sdds_dir = args.sdds_dir
-phase_output_dir = args.main_output_dir + args.phase_output_dir
+phase_output_dir = args.phase_output_dir
 main_output_dir = args.main_output_dir
 data = 'getphasetot' + axis + '.out'
 

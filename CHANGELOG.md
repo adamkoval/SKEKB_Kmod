@@ -100,10 +100,16 @@
 	* checkBPMs_schematic.py:
 	[changed]
 	- Destination for output .png figures.
+	[fixed]
+	- async_output_dir definition to not include the main_output_dir, 
+	as this was already compensated for in get_bpm_data.py
 
 	* checkBPMs_colormap.py:
 	[changed]
 	- Destination for output .png figures.
+	[fixed]
+	- phase_output_dir definition to not include the main_output_dir, 
+	as this was already compensated for in get_bpm_data.py
 
 	* get_bpm_data.py:
 	[added]
