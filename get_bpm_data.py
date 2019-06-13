@@ -7,6 +7,10 @@ import sys
 from subprocess import Popen
 from func import read_pathnames, look_for_dict, generic_dict
 
+# Debug mode
+debug = 'no'
+
+# Read in destinations
 pathnames = read_pathnames()
 
 # General
@@ -58,7 +62,6 @@ else:
     os.system("mkdir " + temp_dir)
 
 # Checking for debug option
-debug = 'yes'
 if debug == 'yes':
     loopend = '2'
 else:

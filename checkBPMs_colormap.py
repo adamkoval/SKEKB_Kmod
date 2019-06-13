@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 from func import BPMs_from_sdds, get_data_column, get_dict_colormap
 
-# Argument parser.
+# Argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument('--axis', '-ax',
                     dest='axis',
@@ -32,7 +32,7 @@ parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
 
-# Definitions.
+# Definitions
 axis = args.axis
 AXIS = axis.capitalize()
 sdds_dir = args.sdds_dir
@@ -40,13 +40,13 @@ phase_output_dir = args.phase_output_dir
 main_output_dir = args.main_output_dir
 data = 'getphasetot' + axis + '.out'
 
-# List all files in phase_output_dir.
+# List all files in phase_output_dir
 file_list = os.listdir(phase_output_dir)
 
-# List all BPMs from any sdds file.
+# List all BPMs from any sdds file
 BPM_list = BPMs_from_sdds(sdds_dir + os.listdir(sdds_dir)[0])[0]
 
-# Create dataframe for plotting.
+# Create dataframe for plotting
 df = {}
 for file in file_list:
     df[file] = []
@@ -60,7 +60,7 @@ for file in file_list:
 df = pandas.DataFrame(df, index=BPM_list)
 df = df
 
-# Set up the plot.
+# Set up the plot
 with open('cmap.txt','r') as f:
     lines = f.readlines()
 cmatrix = []
@@ -80,7 +80,7 @@ row_length = len(BPM_list)
 y_posn = [i for i in range(column_length)]
 x_posn = [i for i in range(row_length)]
 
-# Plot.
+# Plot
 fig = plt.figure(figsize=(17, 11))
 ax = fig.add_subplot(111)
 

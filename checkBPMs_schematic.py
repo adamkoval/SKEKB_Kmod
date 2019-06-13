@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from func import BPMs_from_sdds, get_all_outofsynch, get_dict_schematic
 
-# Argument parser.
+# Argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument('--axis', '-ax',
                     dest='axis',
@@ -31,22 +31,22 @@ parser.add_argument('--save', '-s',
                     action='store_true')
 args = parser.parse_args()
 
-# Definitions.
+# Definitions
 axis = args.axis
 sdds_dir = args.sdds_dir
 async_output_dir = args.async_output_dir
 main_output_dir = args.main_output_dir
 
-# List all files in outofphase*/ dir.
+# List all files in outofphase*/ dir
 file_list = os.listdir(async_output_dir)
 
-# List all BPMs from any sdds file.
+# List all BPMs from any sdds file
 BPM_list = BPMs_from_sdds(sdds_dir + os.listdir(sdds_dir)[0])[0]
 
-# Get a dictionary of all files from outofsynch dir.
+# Get a dictionary of all files from outofsynch dir
 all_outofsynch = get_all_outofsynch(async_output_dir)
 
-# Create dataframe for plotting.
+# Create dataframe for plotting
 df = {}
 for file in file_list:
     df[file] = []
@@ -57,7 +57,7 @@ for file in file_list:
             df[file].append('~')
 df = pandas.DataFrame(df, index = BPM_list)
 
-# Set up the plot.
+# Set up the plot
 column_length = len(df.columns.tolist())
 row_length = len(BPM_list)
 y_posn = [i for i in range(column_length)]
@@ -65,7 +65,7 @@ x_posn = [i for i in range(row_length)]
 
 print("Ready to plot")
 
-# Plot.
+# Plot
 fig = plt.figure(figsize=(17, 11))
 ax1 = fig.add_subplot(111)
 plt.subplots_adjust(top=.84)

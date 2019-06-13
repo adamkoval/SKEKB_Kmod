@@ -4,7 +4,7 @@ import os
 from subprocess import Popen
 import argparse
 
-# Argument parser.
+# Argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument('--python_exe',
                   dest="python_exe",
@@ -26,8 +26,8 @@ parser.add_argument('--harmonic_output_dir', '-hod',
                   action="store")
 args = parser.parse_args()
 
-# Check for output directories for Beta-Beat.src scripts.
-# If not present, create.
+# Check for output directories for Beta-Beat.src scripts
+# If not present, create
 if not os.path.exists(args.hod):
     os.system("mkdir " + args.hod)
 if not os.path.exists(args.pod):
