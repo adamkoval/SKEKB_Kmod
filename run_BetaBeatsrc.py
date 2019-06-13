@@ -6,22 +6,22 @@ import argparse
 
 # Argument parser.
 parser = argparse.ArgumentParser()
-parser.add_option('--python_exe',
+parser.add_argument('--python_exe',
                   dest="python_exe",
                   action="store")
-parser.add_option('--BetaBeatsrc_dir',
+parser.add_argument('--BetaBeatsrc_dir',
                   dest="BetaBeatsrc_dir",
                   action="store")
-parser.add_option('--model_dir',
+parser.add_argument('--model_dir',
                   dest="model_dir",
                   action="store")
-parser.add_option('--sdds_dir',
+parser.add_argument('--sdds_dir',
                   dest="sdds_dir",
                   action="store")
-parser.add_option('--phase_output_dir', '-pod',
+parser.add_argument('--phase_output_dir', '-pod',
                   dest="pod",
                   action="store")
-parser.add_option('--harmonic_output_dir', '-hod',
+parser.add_argument('--harmonic_output_dir', '-hod',
                   dest="hod",
                   action="store")
 args = parser.parse_args()

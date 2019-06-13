@@ -108,3 +108,7 @@
 	* get_bpm_data.py:
 	[added]
 	- checkBPMs_colormap/schematic.py functionality.
+
+	* run_BetaBeatsrc.py:
+	[fixed]
+	- add_option to add_argument, in accordance with argparse.
