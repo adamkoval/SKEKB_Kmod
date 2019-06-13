@@ -145,7 +145,6 @@ for axis in ['x', 'y']:
                '--save'])
     p.wait()
 
-
 print(" *******************************\n",
       "Asynchronous BPMs found, converting raw -> sdds with synch fix.\n",
       "*******************************")
