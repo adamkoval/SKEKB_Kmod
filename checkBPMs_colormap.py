@@ -49,7 +49,7 @@ df = {}
 for file in file_list:
     df[file] = []
     names = get_data_column(phase_output_dir, file, data, 'NAME')
-    phases = get_data_column(phase_output_dir, file, data, 'DELTAPHASEX')
+    phases = get_data_column(phase_output_dir, file, data, 'DELTAPHASE' + AXIS)
     for BPM in BPM_list:
         try:
             df[file].append(get_dict_colormap(names, phases)[BPM])

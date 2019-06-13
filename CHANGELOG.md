@@ -111,7 +111,8 @@
 	- Destination for output .png figures.
 	[fixed]
 	- phase_output_dir definition to not include the main_output_dir, 
-	as this was already compensated for in get_bpm_data.py
+	as this was already compensated for in get_bpm_data.py.
+	- Trying to obtain DELTAPHASEX even for y-axis.
 	[added]
 	- Script completion message at the end.
 
