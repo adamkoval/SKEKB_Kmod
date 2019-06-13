@@ -103,4 +103,8 @@ if args.save == True:
 
 plt.show()
 
+print(" *******************************\n",
+      "checkBPMs_colormap.py: Script made it to the end, moving on...\n",
+      "*******************************")
+
 sys.exit()

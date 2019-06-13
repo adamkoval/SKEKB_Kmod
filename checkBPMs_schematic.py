@@ -101,4 +101,8 @@ if args.save == True:
 
 plt.show()
 
+print(" *******************************\n",
+      "checkBPMs_schematic.py: Script made it to the end, moving on...\n",
+      "*******************************")
+
 sys.exit()

@@ -103,6 +103,8 @@
 	[fixed]
 	- async_output_dir definition to not include the main_output_dir, 
 	as this was already compensated for in get_bpm_data.py
+	[added]
+	- Script completion message at the end.
 
 	* checkBPMs_colormap.py:
 	[changed]
@@ -110,6 +112,8 @@
 	[fixed]
 	- phase_output_dir definition to not include the main_output_dir, 
 	as this was already compensated for in get_bpm_data.py
+	[added]
+	- Script completion message at the end.
 
 	* get_bpm_data.py:
 	[added]
