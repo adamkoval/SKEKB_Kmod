@@ -140,3 +140,8 @@
 	[changed]
 	- Debug option is not an argument --debug/-db when running the script
 	from console.
+
+	* main dir:
+	[changed]
+	- Removed pathnames.txt from git repo, and left only pathnames_sample.txt.
+	The user should copy pathnames_sample.txt to pathnames.txt and edit it.

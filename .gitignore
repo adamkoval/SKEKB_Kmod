@@ -1,3 +1,6 @@
+# Ignoring personal pathnames.txt file
+pathnames.txt
+
 # Ignoring compiled function files
 *.pyc
 
