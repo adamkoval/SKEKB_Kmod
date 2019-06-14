@@ -132,3 +132,11 @@
 	* func.py:
 	[fixed]
 	- no "numpy as np" import.
+
+
+2019-06-14	Adam Koval	adam.koval@cern.ch
+
+	* get_bpm_data.py:
+	[changed]
+	- Debug option is not an argument --debug/-db when running the script
+	from console.

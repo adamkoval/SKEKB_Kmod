@@ -4,11 +4,21 @@
 from __future__ import print_function
 import os
 import sys
+import argparse
 from subprocess import Popen
 from func import read_pathnames, look_for_dict, generic_dict
 
-# Debug mode => 'yes' or 'no' ('no' does nothing)
-debug = 'yes'
+# Argument parser
+parser = argparse.ArgumentParser()
+parser.add_argument('--debug', '-db',
+                    action='store_true')
+args = parser.parse_args()
+
+# Checking for debug option
+if args.debug == True:
+    loopend = '2'
+else:
+    loopend = 'Length[runs]'
 
 # Read in destinations
 pathnames = read_pathnames()
@@ -60,12 +70,6 @@ if os.path.exists(temp_dir):
     os.system("rm -r " + temp_dir + "*")
 else:
     os.system("mkdir " + temp_dir)
-
-# Checking for debug option
-if debug == 'yes':
-    loopend = '2'
-else:
-    loopend = 'Length[runs]'
 
 # Conversion without asynch knowledge
 file = open("prerun.sad", "w")
