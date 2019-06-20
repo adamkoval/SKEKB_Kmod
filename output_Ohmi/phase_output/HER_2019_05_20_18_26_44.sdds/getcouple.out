@@ -1,0 +1,20 @@
+@ Measure_optics:version %s "0.2.0"
+@ Command %s "/usr/bin/python2 '/home/akoval/work_local/git/Beta-Beat.src/measure_optics.py' '--model' 'model/' '--accel' 'skekb' '--files' 'output/harmonic_output/HER_2019_05_20_18_26_44.sdds' '--output' 'output/phase_output/HER_2019_05_20_18_26_44.sdds/'"
+@ CWD %s "/home/akoval/work_local/git/SKEKB_Kmod"
+@ Date %s "14. June 2019, 13:55:42"
+@ Model_directory %s "model/"
+@ FILENAME %s "getcouple.out"
+@ CG %le nan
+@ CG_std %le nan
+@ QG %le nan
+@ Q1F %le 0.5444053704161292
+@ Q2F %le 0.610307832590731
+*                 NAME                    S                COUNT               F1001W               FWSTD1               F1001R               F1001I               F1010W               FWSTD2               F1010R               F1010I                Q1001             Q1001STD                Q1010             Q1010STD            MDLF1001R            MDLF1001I            MDLF1010R            MDLF1010I
+$                   %s                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le
+              "MQD3E4"          270.0136808                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.4412935326707      0.2000788565817      0.2662705619307      0.1466618150028                  nan                  nan                  nan                  nan
+            "MQTATNE1"          354.4092937                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.6311739473181      0.1792628373503      0.8666167705595      0.1844265298553                  nan                  nan                  nan                  nan
+               "MQI6E"         1404.3012987                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.3397439533035      0.1883437465269   0.0005310146611353     0.07130756036319                  nan                  nan                  nan                  nan
+             "MQD3E33"         2501.9356578                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.2717445468985     0.02317809499705      0.1226301822477      0.2166328896441                  nan                  nan                  nan                  nan
+            "MQTAOTE1"         2616.1355465                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.7612887654505      0.1349667324432      0.7668607380856      0.1962277403059                  nan                  nan                  nan                  nan
+             "MQLB1RE"         2960.9918734                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan       0.710527603801     0.07446764356073      0.7571317096309      0.1296850779034                  nan                  nan                  nan                  nan
+             "MQLC7RE"         2989.1433603                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan     0.02028312348598      0.2148900144084      0.4455300813531       0.137206139221                  nan                  nan                  nan                  nan

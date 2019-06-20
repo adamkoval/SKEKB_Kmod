@@ -1,0 +1,10 @@
+@ Measure_optics:version %s "0.2.0"
+@ Command %s "/usr/bin/python2 '/home/akoval/work_local/git/Beta-Beat.src/measure_optics.py' '--model' 'model/' '--accel' 'skekb' '--files' 'output/harmonic_output/HER_2019_05_20_18_28_44.sdds' '--output' 'output/phase_output/HER_2019_05_20_18_28_44.sdds/'"
+@ CWD %s "/home/akoval/work_local/git/SKEKB_Kmod"
+@ Date %s "14. June 2019, 13:56:58"
+@ Model_directory %s "model/"
+@ COMMENT %s "Calculates the kick from the model beta function"
+@ FILENAME %s "getkick.out"
+*                  DPP                   QX                QXRMS                   QY                QYRMS                NATQX             NATQXRMS                NATQY             NATQYRMS              sqrt2JX           sqrt2JXSTD              sqrt2JY           sqrt2JYSTD                  2JX               2JXSTD                  2JY               2JYSTD
+$                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le
+                     0      0.5436251353721    1.54263548399e-06      0.6107033358461    0.004827077876865      0.5436251353721    1.54263548399e-06      0.6107033358461    0.004827077876865      0.3830942203507     0.08195654874115       0.201670040887      0.1139659367347      0.1534780575476     0.07425844302479     0.05365904012718     0.06852480355224

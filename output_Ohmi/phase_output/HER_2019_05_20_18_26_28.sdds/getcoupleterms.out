@@ -1,0 +1,19 @@
+@ Measure_optics:version %s "0.2.0"
+@ Command %s "/usr/bin/python2 '/home/akoval/work_local/git/Beta-Beat.src/measure_optics.py' '--model' 'model/' '--accel' 'skekb' '--files' 'output/harmonic_output/HER_2019_05_20_18_26_28.sdds' '--output' 'output/phase_output/HER_2019_05_20_18_26_28.sdds/'"
+@ CWD %s "/home/akoval/work_local/git/SKEKB_Kmod"
+@ Date %s "14. June 2019, 13:55:13"
+@ Model_directory %s "model/"
+@ FILENAME %s "getcoupleterms.out"
+@ DQMIN %le -1.0
+@ DQMINE %le 1.48323969742e-08
+*                 NAME                    S                 DETC                DETCE                GAMMA               GAMMAE                  C11                  C12                  C21                  C22
+$                   %s                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le
+               MQLA2LE           98.9121927                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+                MQD3E4          270.0136808                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE18         1059.5647385                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+                 MQI5E         1418.7440064                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQD3E21         1671.2575666                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE35         2104.6968698                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE37         2389.8065079                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQD3E33         2501.9356578                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQLC7RE         2989.1433603                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1

@@ -25,8 +25,7 @@ pathnames = read_pathnames()
 
 # General
 ringID = pathnames["ringID"]
-lattice_dir = pathnames["lattice_dir"]
-lattice_file = pathnames["lattice_file"]
+lattice_path = pathnames["lattice_path"]
 
 # Paths to executables
 gsad = pathnames["gsad"]
@@ -34,14 +33,14 @@ python_exe = pathnames["python_exe"]
 BetaBeatsrc_path = pathnames["BetaBeatsrc_path"]
 
 # Input directories
-data_input_dir = pathnames["data_input_dir"]
+input_data_dir = pathnames["input_data_dir"]
 model_dir = pathnames["model_dir"]
 
 # Output directories
 main_output_dir = pathnames["main_output_dir"]
 temp_dir = pathnames["temp_dir"]
-harmonic_output_dir = main_output_dir + pathnames["harmonic_output_dir"]
-phase_output_dir = main_output_dir + pathnames["phase_output_dir"]
+harmonic_output_dir = main_output_dir + "harmonic_output/"
+phase_output_dir = main_output_dir + "phase_output/"
 
 # Output files
 ftwissbpm = main_output_dir + pathnames["ftwissbpm"]
@@ -55,7 +54,7 @@ while True:
     else:
         user_input = raw_input('There is no dictionary file present. Would you like to create a new one (input -> create) or would you like to provide one (input -> provide)?\n')
         if user_input == 'create':
-            generic_dict(data_input_dir, ringID)
+            generic_dict(input_data_dir, ringID)
             continue
         elif user_input == 'provide':
             continue

@@ -1,0 +1,25 @@
+@ Measure_optics:version %s "0.2.0"
+@ Command %s "/usr/bin/python2 '/home/akoval/work_local/git/Beta-Beat.src/measure_optics.py' '--model' 'model/' '--accel' 'skekb' '--files' 'output/harmonic_output/HER_2019_05_20_18_20_58.sdds' '--output' 'output/phase_output/HER_2019_05_20_18_20_58.sdds/'"
+@ CWD %s "/home/akoval/work_local/git/SKEKB_Kmod"
+@ Date %s "14. June 2019, 13:52:39"
+@ Model_directory %s "model/"
+@ FILENAME %s "getcoupleterms.out"
+@ DQMIN %le -1.0
+@ DQMINE %le 1.48323969742e-08
+*                 NAME                    S                 DETC                DETCE                GAMMA               GAMMAE                  C11                  C12                  C21                  C22
+$                   %s                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le
+               MQLC7LE           27.2720861                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQR2NE1          696.7698054                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQFRNE3          753.3246054                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+              MQTANFE1         1107.5016074                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+                 MQI5E         1418.7440064                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+                MQX2RE         1494.6206604                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+                 MQM7E         1608.8759522                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE30          1813.166033                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQD3E29         2065.4852081                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE35         2104.6968698                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQR2ORE         2203.8099939                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE37         2389.8065079                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE39         2465.4769137                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQEAE44         2735.3901425                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1
+               MQLC3RE         3003.3799331                  nan                   -1                   -1                   -1                   -1                   -1                   -1                   -1

@@ -1,8 +1,7 @@
 # ======================================================================= 
 # EDIT THIS FILE ACCORDING TO NEED
 # ringID: Name of the ring which you will be using "HER" or "LER".
-# lattice_dir: Directory which contains SAD lattice/s.
-# lattice_file: Name of the SAD lattice file you will be using.
+# lattice_dir: Path of the SAD lattice you will be using.
 # model_dir: Directory containing accelerator model information for
 #	     Beta-Beat.src scripts.
 # ftwissbpm: <Renjun>
@@ -22,17 +21,14 @@
 # BetaBeatsrcPath: Path to the Beta-Beat.src package.
 # =======================================================================
 ringID = HER
-lattice_dir = lattice/
-lattice_file = sher_5780_100_3_renjun.sad
+lattice_path = lattice/sher_5780_100_3_renjun.sad
 model_dir = model/
 ftwissbpm = twiss_moni.dat
 ftwissall = twiss_all.dat
 fkmodu = simulationModulation.txt
 main_output_dir = output/
 temp_dir = temp/
-harmonic_output_dir = harmonic_output/
-phase_output_dir = phase_output/
-data_input_dir = data_input/
-gsad = /home/akoval/SAD/oldsad/bin/gs
+input_data_dir = input_data/
+gsad = /home/akoval/work_local/git/SAD/bin/gs
 python_exe = python2
-BetaBeatsrc_path = /home/akoval/work_local/bbeatlocal/Beta-Beat.src/
+BetaBeatsrc_path = /home/akoval/work_local/git/Beta-Beat.src/

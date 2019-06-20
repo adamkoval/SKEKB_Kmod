@@ -1,0 +1,17 @@
+@ Measure_optics:version %s "0.2.0"
+@ Command %s "/usr/bin/python2 '/home/akoval/work_local/git/Beta-Beat.src/measure_optics.py' '--model' 'model/' '--accel' 'skekb' '--files' 'output/harmonic_output/HER_2019_05_20_18_30_00.sdds' '--output' 'output/phase_output/HER_2019_05_20_18_30_00.sdds/'"
+@ CWD %s "/home/akoval/work_local/git/SKEKB_Kmod"
+@ Date %s "14. June 2019, 13:57:44"
+@ Model_directory %s "model/"
+@ FILENAME %s "getcouple.out"
+@ CG %le nan
+@ CG_std %le nan
+@ QG %le nan
+@ Q1F %le 0.5439879633224035
+@ Q2F %le 0.6049067091484432
+*                 NAME                    S                COUNT               F1001W               FWSTD1               F1001R               F1001I               F1010W               FWSTD2               F1010R               F1010I                Q1001             Q1001STD                Q1010             Q1010STD            MDLF1001R            MDLF1001I            MDLF1010R            MDLF1010I
+$                   %s                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le                  %le
+             "MQD3E33"         2501.9356578                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.8226223232395      0.2144197667148      0.7490813855521     0.07225338865735                  nan                  nan                  nan                  nan
+             "MQEAE41"         2541.1473195                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.3442750513075      0.1354506456289      0.1441070723373      0.1139754860233                  nan                  nan                  nan                  nan
+             "MQLB1RE"         2960.9918734                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.2836082472955       0.198763736472      0.3068716370016     0.03514361993818                  nan                  nan                  nan                  nan
+             "MQLC7RE"         2989.1433603                    1                  nan                  nan                  nan                  nan                  nan                  nan                  nan                  nan      0.6275464650245    0.008568294684956      0.9100150599686     0.04514712840513                  nan                  nan                  nan                  nan

@@ -1,0 +1,54 @@
+@ Measure_optics:version %s "0.2.0"
+@ Command %s "/usr/bin/python2 '/home/akoval/work_local/git/Beta-Beat.src/measure_optics.py' '--model' 'model/' '--accel' 'skekb' '--files' 'output/harmonic_output/HER_2019_05_20_18_24_59.sdds' '--output' 'output/phase_output/HER_2019_05_20_18_24_59.sdds/'"
+@ CWD %s "/home/akoval/work_local/git/SKEKB_Kmod"
+@ Date %s "14. June 2019, 13:54:16"
+@ Model_directory %s "model/"
+@ TABLE %s "ORBIT"
+@ TYPE %s "ORBIT"
+@ Q1 %le 0.5447712070796205
+@ Q2 %le 0.6122371712571784
+@ FILENAME %s "getCOy.out"
+*                 NAME                    S                COUNT                    Y                 STDY                 YMDL               MUYMDL               DELTAY
+$                   %s                  %le                   %d                  %le                  %le                  %le                  %le                  %le
+                MQC1LE            0.5300002                    1       1.004797126063                  nan                  nan            0.2490992                  nan
+                MQC2LE            2.2500008                    1      0.5117522330415                  nan                  nan            0.2499778                  nan
+               MQLC7LE           27.2720861                    1       1.887085031591                  nan                  nan            0.7492946                  nan
+               MQLB1LE           55.2235731                    1      0.4463832777167                  nan                  nan            1.2500394                  nan
+               MQLA5LE          119.0986538                    1      0.1175648884582                  nan                  nan              2.94926                  nan
+                MQD3E1          164.5639584                    1      0.3196890187219                  nan                  nan            3.4064553                  nan
+                MQD3E4          270.0136808                    1       1.314431663232                  nan                  nan            5.0411482                  nan
+              MQTATNE1          354.4092937                    1       1.241510878839                  nan                  nan            6.2268103                  nan
+              MQTATNE2          397.7476034                    1      0.8120327741371                  nan                  nan            6.6685508                  nan
+                MQEAE8          472.7108711                    1      -1.014669048774                  nan                  nan            7.7060253                  nan
+                MQD3E8          511.9225329                    1     -0.1011535647947                  nan                  nan            8.3656416                  nan
+               MQDRNE5          781.6020054                    1     -0.2479483276184                  nan                  nan           11.7122452                  nan
+               MQEAE13           881.197528                    1       1.509764406928                  nan                  nan           12.8899378                  nan
+               MQD3E12          947.4355886                    1      0.0858919040173                  nan                  nan           13.8650143                  nan
+              MQTANFE1         1107.5016074                    1     -0.1305509878415                  nan                  nan           16.1739407                  nan
+               MQEAE20         1225.8031848                    1     -0.2683311558171                  nan                  nan           17.6531557                  nan
+               MQD3E18         1265.0148465                    1       1.437537850975                  nan                  nan            18.312772                  nan
+               MQEAE22         1301.4735906                    1      0.2561619509167                  nan                  nan           18.7764199                  nan
+               MQEAE23         1350.1175975                    1     0.08145184822274                  nan                  nan           19.5842239                  nan
+                 MQI6E         1404.3012987                    1      0.1090833870231                  nan                  nan           20.2018289                  nan
+                 MQI5E         1418.7440064                    1       1.100185309005                  nan                  nan           20.2546404                  nan
+                 MQI4E         1424.1361014                    1      0.6908574724362                  nan                  nan           20.2734103                  nan
+                MQX2RE         1494.6206604                    1      0.6941903394447                  nan                  nan           21.2341795                  nan
+                 MQM2E         1564.3492168                    1      0.0750991509522                  nan                  nan           22.0286912                  nan
+               MQD3E21         1671.2575666                    1        2.29766463972                  nan                  nan           23.4501631                  nan
+               MQD3E23         1746.9279724                    1      -1.574638814382                  nan                  nan           24.5734273                  nan
+               MQEAE29         1786.1396341                    1     -0.2657426692159                  nan                  nan           25.2330437                  nan
+               MQEAE30          1813.166033                    1      0.5304866724362                  nan                  nan           25.5485039                  nan
+              MQTAFOE1         1861.1278611                    1     -0.6222147898199                  nan                  nan           26.2818318                  nan
+              MQTAFOE2         1905.3942301                    1      0.5712398943472                  nan                  nan           26.7136413                  nan
+               MQEAE32         1980.3824571                    1      0.7843757814657                  nan                  nan           27.7624294                  nan
+               MQD3E29         2065.4852081                    1      0.1924313280648                  nan                  nan           29.0338813                  nan
+               MQDROE5         2288.3421939                    1      0.2876657332899                  nan                  nan           32.0959819                  nan
+               MQEAE37         2389.8065079                    1      0.6204458523762                  nan                  nan           33.3509534                  nan
+               MQD3E33         2501.9356578                    1      0.6848446211356                  nan                  nan           34.9378656                  nan
+               MQD3E40           2850.27221                    1       -1.11880441053                  nan                  nan           39.9097482                  nan
+               MQLA2RE         2920.9780873                    1       1.521578607129                  nan                  nan           41.0885679                  nan
+               MQLB1RE         2960.9918734                    1     -0.4292954572986                  nan                  nan           42.3540933                  nan
+               MQLC7RE         2989.1433603                    1      0.8373861942221                  nan                  nan            42.854773                  nan
+               MQLC3RE         3003.3799331                    1      -1.334336928214                  nan                  nan           43.3284036                  nan
+                MQC2RE         3013.8146988                    1     -0.6035536019078                  nan                  nan           43.3540103                  nan
+                MQC1RE         3015.7846995                    1      0.2430465341767                  nan                  nan           43.3550008                  nan

@@ -145,3 +145,18 @@
 	[changed]
 	- Removed pathnames.txt from git repo, and left only pathnames_sample.txt.
 	The user should copy pathnames_sample.txt to pathnames.txt and edit it.
+
+
+2019-06-20	Adam Koval	adam.koval@cern.ch
+
+	* pathnames.txt:
+	[changed]
+	- Removed lattice_file and lattice_dir and absorbed them into lattice_path
+	variable instead.
+	- Removed phase_output_dir and harmonic_output_dir.
+	- Renamed data_input_dir to input_data_dir.
+
+	* get_bpm_data.py:
+	[changed]
+	- Changed definition of phase_output_dir and harmonic_output_dir as per changes to pathnames.txt.
+	- Renamed data_input_dir to input_data_dir.
