@@ -160,3 +160,7 @@
 	[changed]
 	- Changed definition of phase_output_dir and harmonic_output_dir as per changes to pathnames.txt.
 	- Renamed data_input_dir to input_data_dir.
+
+	* .gitignore:
+	[added]
+	- Ignoring of any naming of output and temp dirs, as well as pathnames.txt file.

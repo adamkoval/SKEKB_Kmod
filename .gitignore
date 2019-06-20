@@ -1,5 +1,5 @@
 # Ignoring personal pathnames.txt file
-pathnames.txt
+pathnames.txt*
 
 # Ignoring compiled function files
 *.pyc
@@ -14,8 +14,8 @@ twiss_moni.dat
 twiss_all.dat
 
 # Ignoring all output dirs
-temp/
-output/
+temp*/
+output*/
 
 # Ignoring temporary dev dir
 asynch/
