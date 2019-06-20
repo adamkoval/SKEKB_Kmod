@@ -6,12 +6,12 @@ import numpy as np
 # ====================================================
 # To be used in get_bpm_data.py
 # ====================================================
-def look_for_dict():
+def look_for_dict(file_dict):
     """
     Checks for the presence of the dict file.
     NOTE: This function does not check the format of the dictionary!
     """
-    if os.path.exists('file_dict.txt'):
+    if os.path.exists(file_dict):
         print('Dictionary file has been found.')
         return True
     else:

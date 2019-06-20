@@ -26,6 +26,7 @@ pathnames = read_pathnames()
 # General
 ringID = pathnames["ringID"]
 lattice_path = pathnames["lattice_path"]
+file_dict = pathnames["file_dict"]
 
 # Paths to executables
 gsad = pathnames["gsad"]
@@ -72,7 +73,7 @@ else:
 
 # Conversion without asynch knowledge
 file = open("prerun.sad", "w")
-file.write(' READ "' + lattice_dir + lattice_file + '";\n'
+file.write(' READ "' + lattice_path + '";\n'
            ' FFS;\n'
            '\n'
            ' ring = "' + ringID + '";\n'
@@ -87,7 +88,7 @@ file.write(' READ "' + lattice_dir + lattice_file + '";\n'
            ' CELL; CALC;\n'
            ' emit;\n\n'
            ' Get["func.n"];\n\n'
-           ' runs = Get["file_dict.txt"];\n'
+           ' runs = Get["' + file_dict + '"];\n'
            ' Do[\n'
            '   fnr1 = "./"//runs[i, 1];\n'
            '   fbpm = "None";\n' # This line tells FormatBPMRead[] to convert without synch fix
@@ -162,7 +163,7 @@ print(" ********************************************\n",
 
 # Conversion with asynch knowledge + KModu simulation
 file = open("run.sad", "w")
-file.write(' READ "' + lattice_dir + lattice_file + '";\n'
+file.write(' READ "' + lattice_path + '";\n'
            ' FFS;\n'
            '\n'
            ' ring = "' + ringID + '";\n'
@@ -180,7 +181,7 @@ file.write(' READ "' + lattice_dir + lattice_file + '";\n'
            ' fn1 = "' + ftwissbpm + '";\n'
            ' fn2 = "' + ftwissall + '";\n'
            ' SaveTwiss[fn1, fn2];\n\n'
-           ' runs = Get["file_dict.txt"];\n'
+           ' runs = Get["' + file_dict + '"];\n'
            ' Do[\n'
            '   fnr1 = "./"//runs[i, 1];\n'
            '   fbpm = "' + main_output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.

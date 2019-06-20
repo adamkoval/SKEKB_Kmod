@@ -155,12 +155,20 @@
 	variable instead.
 	- Removed phase_output_dir and harmonic_output_dir.
 	- Renamed data_input_dir to input_data_dir.
+	[added]
+	- file_dict variable.
 
 	* get_bpm_data.py:
 	[changed]
 	- Changed definition of phase_output_dir and harmonic_output_dir as per changes to pathnames.txt.
 	- Renamed data_input_dir to input_data_dir.
+	[added]
+	- file_dict variabele.
 
 	* .gitignore:
 	[added]
 	- Ignoring of any naming of output and temp dirs, as well as pathnames.txt file.
+
+	* func.py:
+	[changed]
+	- look_for_dict() func now takes argument of file_dict variable.
