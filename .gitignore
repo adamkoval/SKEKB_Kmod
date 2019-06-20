@@ -17,6 +17,11 @@ twiss_all.dat
 temp*/
 output*/
 
+# Ignoring all custom input dirs
+input_data_*/
+lattice_*/
+model_*/
+
 # Ignoring temporary dev dir
 asynch/
 
