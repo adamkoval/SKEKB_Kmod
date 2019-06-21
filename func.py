@@ -19,12 +19,12 @@ def look_for_dict(file_dict):
         return False
 
 
-def read_pathnames():
+def read_pathnames(pathnames):
     """
     Reads specifically the file 'pathnames.txt'
     and returns a dictionary with the assigned values.
     """
-    with open('pathnames.txt') as f:
+    with open(pathnames) as f:
         lines = f.readlines()
     lines = [line for line in lines if line[0] != '#']
 

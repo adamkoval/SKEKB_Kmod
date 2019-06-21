@@ -172,3 +172,15 @@
 	* func.py:
 	[changed]
 	- look_for_dict() func now takes argument of file_dict variable.
+
+
+2019-06-21	Adam Koval	adam.koval@cern.ch
+
+	* get_bpm_data.py:
+	[added]
+	- pathnames is now an input argument, to allow for use of different
+	pathnames files.
+
+	* func.py:
+	[added]
+	- read_pathnames() function now takes input argument of pathnames.

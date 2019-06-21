@@ -12,6 +12,9 @@ from func import read_pathnames, look_for_dict, generic_dict
 parser = argparse.ArgumentParser()
 parser.add_argument('--debug', '-db',
                     action='store_true')
+parser.add_argument('--pathnames',
+                    action='store',
+                    dest='pathnames')
 args = parser.parse_args()
 
 # Checking for debug option
@@ -21,7 +24,7 @@ else:
     loopend = 'Length[runs]'
 
 # Read in destinations
-pathnames = read_pathnames()
+pathnames = read_pathnames(args.pathnames)
 
 # General
 ringID = pathnames["ringID"]
