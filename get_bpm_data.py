@@ -53,7 +53,7 @@ fkmodu = main_output_dir + pathnames["fkmodu"]
 
 # Checking for a dictionary
 while True:
-    if look_for_dict() == True:
+    if look_for_dict(file_dict) == True:
         break
     else:
         user_input = raw_input('There is no dictionary file present. Would you like to create a new one (input -> create) or would you like to provide one (input -> provide)?\n')
