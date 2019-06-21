@@ -1,29 +1,22 @@
-# Ignoring personal pathnames.txt file
-pathnames.txt*
+*
 
-# Ignoring compiled function files
-*.pyc
-
-# Ignoring generatd run files
-prerun.sad
-run.sad
-
-# Ignoring generated output files
-simulationModulation.txt
-twiss_moni.dat
-twiss_all.dat
-
-# Ignoring all output dirs
-temp*/
-output*/
-
-# Ignoring all custom input dirs
-input_data_*/
-lattice_*/
-model_*/
-
-# Ignoring temporary dev dir
-asynch/
-
-# Ignoring all temp files
-*.swp
+# Including
+! input_data_example/
+! lattice_example/
+! model/
+! CHANGELOG.md
+! README.md
+! async.py
+! checkBPMs_colormap.py
+! checkBPMs_schematic.py
+! cmap.txt
+! conv.sad
+! file_dict.txt
+! func.n
+! func.py
+! get_bpm_data.py
+! get_lattice.py
+! get_tune.py
+! pathnames_example.txt
+! run_BetaBeatsrc.py
+! to-do_list.txt
