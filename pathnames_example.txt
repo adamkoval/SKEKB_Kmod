@@ -23,14 +23,14 @@
 #	     desired sdds names.
 # =======================================================================
 ringID = HER
-lattice_path = lattice/sher_5780_100_3_renjun.sad
+lattice_path = lattice_example/sher_5780_100_3_renjun.sad
 model_dir = model/
 ftwissbpm = twiss_moni.dat
 ftwissall = twiss_all.dat
 fkmodu = simulationModulation.txt
 main_output_dir = output/
 temp_dir = temp/
-input_data_dir = input_data/
+input_data_dir = input_data_example/
 gsad = /home/akoval/work_local/git/SAD/bin/gs
 python_exe = python2
 BetaBeatsrc_path = /home/akoval/work_local/git/Beta-Beat.src/
