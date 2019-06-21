@@ -88,7 +88,8 @@ ax = fig.add_subplot(111)
 
 plt.pcolormesh(X, Y, Z, cmap = cm)
 bar = plt.colorbar()
-bar.set_label('$\Delta\ \phi$ [2$\pi$]')
+bar.set_label('$\Delta\ \phi$ [2$\pi$]', fontsize=18)
+bar.ax.tick_params(labelsize=18)
 
 #for i in range(column_length):
 #    if i%3 == 0 and i != 0:
@@ -98,9 +99,9 @@ ax.set_xticks([i for i in range(row_length)])
 ax.set_xticklabels(BPM_list, rotation='vertical')
 ax.set_yticks([i+.5 for i in y_posn])
 ax.set_yticklabels([i[:-4] for i in df.columns.tolist()])
-ax.set_xlabel('BPM')
-ax.set_ylabel('Measurement run')
-plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when  + ')')
+ax.set_xlabel('BPM', fontsize=18)
+ax.set_ylabel('Measurement run', fontsize=18)
+plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when  + ')', fontsize=22)
 
 if args.save == True:
     plt.savefig(main_output_dir

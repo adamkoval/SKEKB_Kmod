@@ -184,3 +184,7 @@
 	* func.py:
 	[added]
 	- read_pathnames() function now takes input argument of pathnames.
+
+	* checkBPMs_colourmap.py:
+	[changed]
+	- Font size on plot, increased.
