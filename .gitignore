@@ -1,22 +1,22 @@
 *
 
 # Including
-! input_data_example/
-! lattice_example/
-! model/
-! CHANGELOG.md
-! README.md
-! async.py
-! checkBPMs_colormap.py
-! checkBPMs_schematic.py
-! cmap.txt
-! conv.sad
-! file_dict.txt
-! func.n
-! func.py
-! get_bpm_data.py
-! get_lattice.py
-! get_tune.py
-! pathnames_example.txt
-! run_BetaBeatsrc.py
-! to-do_list.txt
+!input_data_example/
+!lattice_example/
+!model/
+!CHANGELOG.md
+!README.md
+!async.py
+!checkBPMs_colormap.py
+!checkBPMs_schematic.py
+!cmap.txt
+!conv.sad
+!file_dict.txt
+!func.n
+!func.py
+!get_bpm_data.py
+!get_lattice.py
+!get_tune.py
+!pathnames_example.txt
+!run_BetaBeatsrc.py
+!to-do_list.txt
