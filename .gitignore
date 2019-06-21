@@ -1,9 +1,9 @@
 /*
 
 # Including
-!./input_data_example/*
-!./lattice_example/*
-!./model/*
+!input_data_example/
+!lattice_example/
+!model/
 !CHANGELOG.md
 !README.md
 !async.py
@@ -20,3 +20,4 @@
 !pathnames_example.txt
 !run_BetaBeatsrc.py
 !to-do_list.txt
+!hello.txt
