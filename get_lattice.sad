@@ -3,10 +3,10 @@ FFS;
 Get["func.n"];
 ring$name="HER"; ! "LER"
 bdir = "./../TbT/20May19/";
-ldir = "./lattice/";
+ldir = "./lattice_current/";
 
 Library@Require["LEROptics","HEROptics"];
-If[ring$name=="LER",
+If[ring$name=="HER",
 ring=LEROptics[];
 ,
 ring=HEROptics[];
