@@ -15,6 +15,10 @@ parser.add_argument('--debug', '-db',
 parser.add_argument('--pathnames',
                     action='store',
                     dest='pathnames')
+parser.add_argument('--bpmanalyis_off', '-bpma_off',
+                    action='store_true')
+parser.add_argument('--plotbpma',
+                    action='store_true')
 args = parser.parse_args()
 
 # Checking for debug option
@@ -128,150 +132,153 @@ print(" ********************************************\n",
 # NOTE: This analysis is being run for both axes, but the x-axis is used
 #       in run.sad (generated below) as this one has been found to have 
 #       cleaner results.
-for axis in ['x', 'y']:
-    # async.py
+if args.bpmanalysis_off != True:
+    for axis in ['x', 'y']:
+        # async.py
+        p = Popen([python_exe,
+                   'async.py',
+                   '--phase_output_dir', phase_output_dir,
+                   '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
+                   '--axis', axis])
+        p.wait()
+        
+        if args.plotbpma == True:
+            # checkBPMs_schematic.py
+            p = Popen([python_exe,
+                       'checkBPMs_schematic.py',
+                       '--axis', axis,
+                       '--sdds_dir', temp_dir,
+                       '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
+                       '--main_output_dir', main_output_dir,
+                       '--when', 'before',
+                       '--save'])
+            p.wait()
+    
+            # checkBPMs_colormap.py
+            p = Popen([python_exe,
+                       'checkBPMs_colormap.py',
+                       '--axis', axis,
+                       '--sdds_dir', temp_dir,
+                       '--phase_output_dir', phase_output_dir,
+                       '--main_output_dir', main_output_dir,
+                       '--when', 'before',
+                       '--save'])
+            p.wait()
+    
+    print(" ********************************************\n",
+          "get_bpm_data.py:\n",
+          '"Asynchronous BPMs found, converting raw -> sdds with synch fix."\n',
+          "********************************************")
+    
+    # Conversion with asynch knowledge + KModu simulation
+    file = open("run.sad", "w")
+    file.write(' READ "' + lattice_path + '";\n'
+               ' FFS;\n'
+               '\n'
+               ' ring = "' + ringID + '";\n'
+               ' If[ring=="HER",\n'
+               '   FFS["USE ASCE"],\n'
+               '   If[ring=="LER",\n'
+               '     FFS["USE ASC"],\n'
+               '     Print["\t >> Enter correct ringID (HER or LER)"];\n'
+               '     FFS["end"]\n'
+               '     ]\n'
+               '   ]\n'
+               ' CELL; CALC;\n'
+               ' emit;\n\n'
+               ' Get["func.n"];\n\n'
+               ' fn1 = "' + ftwissbpm + '";\n'
+               ' fn2 = "' + ftwissall + '";\n'
+               ' SaveTwiss[fn1, fn2];\n\n'
+               ' runs = Get["' + file_dict + '"];\n'
+               ' Do[\n'
+               '   fnr1 = "./"//runs[i, 1];\n'
+               '   fbpm = "' + main_output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.
+               '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
+               '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
+               '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
+               '   ,{i, 1, ' + loopend + '}];\n'
+               '\n'
+               # Kmodu simulation
+               '! Couple quadrupole slices in the IR\n'
+               ' If[ring=="HER",\n'
+               '    FFS["CoupLER2HERPartition[];"],\n'
+               '    FFS["CoupHER2LERPartition[];"]\n'
+               '    ];\n'
+               '\n'
+               '! Kmodu assessment in SAD\n'
+               ' GetQCInfo[ring];\n'
+               ' GetTMATRIX[ring];\n'
+               ' QCK1Twiss0 = GetQCValueTwiss[]; ! initial setting\n'
+               '\n'
+               ' Kkmodu = {1-0.0005, 1, 1+0.0005};\n' #
+               ' {NX1L, NY1L} = GetTuneKmodu[QC1L, Kkmodu];\n'
+               ' {NX2L, NY2L} = GetTuneKmodu[QC2L, Kkmodu];\n'
+               ' {NX1R, NY1R} = GetTuneKmodu[QC1R, Kkmodu];\n'
+               ' {NX2R, NY2R} = GetTuneKmodu[QC2R, Kkmodu];\n'
+               '\n'
+               ' fn3 = "' + fkmodu + '";\n'
+               ' WriteIRInformation[fn3, ring];\n'
+               ' AppendTuneModu[fn3, Kkmodu];\n'
+    
+               ' abort;\n')
+    file.close()
+    
+    os.system(gsad + " run.sad");
+    print(" ********************************************\n",
+          "get_bpm_data.py:\n",
+          '"run.sad finished, running analysis script."\n',
+          "********************************************")
+    
+    # Beta-Beat.src analysis
     p = Popen([python_exe,
-               'async.py',
-               '--phase_output_dir', phase_output_dir,
-               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
-               '--axis', axis])
-    p.wait()
-
-    # checkBPMs_schematic.py
-    p = Popen([python_exe,
-               'checkBPMs_schematic.py',
-               '--axis', axis,
+               'run_BetaBeatsrc.py',
+               '--python_exe', python_exe,
+               '--BetaBeatsrc_dir', BetaBeatsrc_path,
+               '--model_dir', model_dir,
                '--sdds_dir', temp_dir,
-               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
-               '--main_output_dir', main_output_dir,
-               '--when', 'before',
-               '--save'])
+               '--harmonic_output_dir', harmonic_output_dir,
+               '--phase_output_dir', phase_output_dir])
     p.wait()
-
-    # checkBPMs_colormap.py
-    p = Popen([python_exe,
-               'checkBPMs_colormap.py',
-               '--axis', axis,
-               '--sdds_dir', temp_dir,
-               '--phase_output_dir', phase_output_dir,
-               '--main_output_dir', main_output_dir,
-               '--when', 'before',
-               '--save'])
-    p.wait()
-
-print(" ********************************************\n",
-      "get_bpm_data.py:\n",
-      '"Asynchronous BPMs found, converting raw -> sdds with synch fix."\n',
-      "********************************************")
-
-# Conversion with asynch knowledge + KModu simulation
-file = open("run.sad", "w")
-file.write(' READ "' + lattice_path + '";\n'
-           ' FFS;\n'
-           '\n'
-           ' ring = "' + ringID + '";\n'
-           ' If[ring=="HER",\n'
-           '   FFS["USE ASCE"],\n'
-           '   If[ring=="LER",\n'
-           '     FFS["USE ASC"],\n'
-           '     Print["\t >> Enter correct ringID (HER or LER)"];\n'
-           '     FFS["end"]\n'
-           '     ]\n'
-           '   ]\n'
-           ' CELL; CALC;\n'
-           ' emit;\n\n'
-           ' Get["func.n"];\n\n'
-           ' fn1 = "' + ftwissbpm + '";\n'
-           ' fn2 = "' + ftwissall + '";\n'
-           ' SaveTwiss[fn1, fn2];\n\n'
-           ' runs = Get["' + file_dict + '"];\n'
-           ' Do[\n'
-           '   fnr1 = "./"//runs[i, 1];\n'
-           '   fbpm = "' + main_output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.
-           '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
-           '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
-           '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
-           '   ,{i, 1, ' + loopend + '}];\n'
-           '\n'
-           # Kmodu simulation
-           '! Couple quadrupole slices in the IR\n'
-           ' If[ring=="HER",\n'
-           '    FFS["CoupLER2HERPartition[];"],\n'
-           '    FFS["CoupHER2LERPartition[];"]\n'
-           '    ];\n'
-           '\n'
-           '! Kmodu assessment in SAD\n'
-           ' GetQCInfo[ring];\n'
-           ' GetTMATRIX[ring];\n'
-           ' QCK1Twiss0 = GetQCValueTwiss[]; ! initial setting\n'
-           '\n'
-           ' Kkmodu = {1-0.0005, 1, 1+0.0005};\n' #
-           ' {NX1L, NY1L} = GetTuneKmodu[QC1L, Kkmodu];\n'
-           ' {NX2L, NY2L} = GetTuneKmodu[QC2L, Kkmodu];\n'
-           ' {NX1R, NY1R} = GetTuneKmodu[QC1R, Kkmodu];\n'
-           ' {NX2R, NY2R} = GetTuneKmodu[QC2R, Kkmodu];\n'
-           '\n'
-           ' fn3 = "' + fkmodu + '";\n'
-           ' WriteIRInformation[fn3, ring];\n'
-           ' AppendTuneModu[fn3, Kkmodu];\n'
-
-           ' abort;\n')
-file.close()
-
-os.system(gsad + " run.sad");
-print(" ********************************************\n",
-      "get_bpm_data.py:\n",
-      '"run.sad finished, running analysis script."\n',
-      "********************************************")
-
-# Beta-Beat.src analysis
-p = Popen([python_exe,
-           'run_BetaBeatsrc.py',
-           '--python_exe', python_exe,
-           '--BetaBeatsrc_dir', BetaBeatsrc_path,
-           '--model_dir', model_dir,
-           '--sdds_dir', temp_dir,
-           '--harmonic_output_dir', harmonic_output_dir,
-           '--phase_output_dir', phase_output_dir])
-p.wait()
-print(" ********************************************\n",
-      "get_bpm_data.py:\n",
-      '"Beta-Beat.src analysis finished, running async analysis again."\n',
-      "********************************************")
-
-# Asynch analysis after
-# NOTE: This analysis is being run for both axes, but the x-axis is used
-#       in run.sad (generated below) as this one has been found to have 
-#       cleaner results.
-for axis in ['x', 'y']:
-    # async.py
-    p = Popen([python_exe,
-               'async.py',
-               '--phase_output_dir', phase_output_dir,
-               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
-               '--axis', axis])
-    p.wait()
-
-    # checkBPMs_schematic.py
-    p = Popen([python_exe,
-               'checkBPMs_schematic.py',
-               '--axis', axis,
-               '--sdds_dir', temp_dir,
-               '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
-               '--main_output_dir', main_output_dir,
-               '--when', 'after',
-               '--save'])
-    p.wait()
-
-    # checkBPMs_colormap.py
-    p = Popen([python_exe,
-               'checkBPMs_colormap.py',
-               '--axis', axis,
-               '--sdds_dir', temp_dir,
-               '--phase_output_dir', phase_output_dir,
-               '--main_output_dir', main_output_dir,
-               '--when', 'after',
-               '--save'])
-    p.wait()
+    print(" ********************************************\n",
+          "get_bpm_data.py:\n",
+          '"Beta-Beat.src analysis finished, running async analysis again."\n',
+          "********************************************")
+    
+    # Asynch analysis after
+    # NOTE: This analysis is being run for both axes, but the x-axis is used
+    #       in run.sad (generated below) as this one has been found to have 
+    #       cleaner results.
+    for axis in ['x', 'y']:
+        # async.py
+        p = Popen([python_exe,
+                   'async.py',
+                   '--phase_output_dir', phase_output_dir,
+                   '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
+                   '--axis', axis])
+        p.wait()
+    
+        if args.plotbpma == True:
+            # checkBPMs_schematic.py
+            p = Popen([python_exe,
+                       'checkBPMs_schematic.py',
+                       '--axis', axis,
+                       '--sdds_dir', temp_dir,
+                       '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
+                       '--main_output_dir', main_output_dir,
+                       '--when', 'after',
+                       '--save'])
+            p.wait()
+    
+            # checkBPMs_colormap.py
+            p = Popen([python_exe,
+                       'checkBPMs_colormap.py',
+                       '--axis', axis,
+                       '--sdds_dir', temp_dir,
+                       '--phase_output_dir', phase_output_dir,
+                       '--main_output_dir', main_output_dir,
+                       '--when', 'after',
+                       '--save'])
+            p.wait()
 
 sys.exit()

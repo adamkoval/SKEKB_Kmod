@@ -188,3 +188,11 @@
 	* checkBPMs_colourmap.py:
 	[changed]
 	- Font size on plot, increased.
+
+
+2019-06-24	Adam Koval	adam.koval@cern.ch	(NEW BRANCH)
+
+	* get_bpm_data.py:
+	[added]
+	- options to opt out of bpm analysis and plotting of bpm maps (latter
+	being for alsad1 usage which does not have matplotlib installed).
