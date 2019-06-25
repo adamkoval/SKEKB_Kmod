@@ -196,3 +196,11 @@
 	[added]
 	- options to opt out of bpm analysis and plotting of bpm maps (latter
 	being for alsad1 usage which does not have matplotlib installed).
+
+
+2019-06-25	Adam Koval	adam.koval@cern.ch
+
+	* func.py:
+	[changed]
+	- generic_dict() now takes argument of file_dict, to enable generating
+	of custom name file_dict.

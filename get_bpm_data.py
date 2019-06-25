@@ -15,7 +15,7 @@ parser.add_argument('--debug', '-db',
 parser.add_argument('--pathnames',
                     action='store',
                     dest='pathnames')
-parser.add_argument('--bpmanalyis_off', '-bpma_off',
+parser.add_argument('--bpmanalysis_off', '-bpma_off',
                     action='store_true')
 parser.add_argument('--plotbpma',
                     action='store_true')
@@ -32,7 +32,11 @@ pathnames = read_pathnames(args.pathnames)
 
 # General
 ringID = pathnames["ringID"]
-lattice_path = pathnames["lattice_path"]
+lattice_dir = pathnames["lattice_dir"]
+if not pathnames["lattice_name"] == '~':
+    lattice_name = pathnames["lattice_name"]
+else:
+    pass
 file_dict = pathnames["file_dict"]
 
 # Paths to executables
@@ -62,7 +66,7 @@ while True:
     else:
         user_input = raw_input('There is no dictionary file present. Would you like to create a new one (input -> create) or would you like to provide one (input -> provide)?\n')
         if user_input == 'create':
-            generic_dict(input_data_dir, ringID)
+            generic_dict(input_data_dir, ringID, file_dict)
             continue
         elif user_input == 'provide':
             continue
@@ -80,7 +84,7 @@ else:
 
 # Conversion without asynch knowledge
 file = open("prerun.sad", "w")
-file.write(' READ "' + lattice_path + '";\n'
+file.write(' READ "' + lattice_dir + lattice_name + '";\n'
            ' FFS;\n'
            '\n'
            ' ring = "' + ringID + '";\n'
@@ -172,7 +176,7 @@ if args.bpmanalysis_off != True:
     
     # Conversion with asynch knowledge + KModu simulation
     file = open("run.sad", "w")
-    file.write(' READ "' + lattice_path + '";\n'
+    file.write(' READ "' + lattice_dir + lattice_name + '";\n'
                ' FFS;\n'
                '\n'
                ' ring = "' + ringID + '";\n'

@@ -36,7 +36,7 @@ def read_pathnames(pathnames):
     return pathnames
 
 
-def generic_dict(data_input_dir, ringID):
+def generic_dict(data_input_dir, ringID, file_dict):
     """
     Creates a generic file_dict.txt file given
     only the input data files and the ring for which one
@@ -47,7 +47,7 @@ def generic_dict(data_input_dir, ringID):
         if file.endswith('.data') and file.startswith(ringID):
             files.append(file)
 
-    fd = open('file_dict.txt', 'w')
+    fd = open(file_dict, 'w')
     fd.write('{\n')
     for i, file in enumerate(files):
         before = data_input_dir + file

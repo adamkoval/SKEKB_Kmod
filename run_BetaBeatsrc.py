@@ -53,13 +53,13 @@ for i, run in enumerate(sdds_files):
                '--outputdir', args.hod,
                '--model', args.model_dir + '/twiss.dat',
                '--startturn', '2',
-               '--endturn', '4000',
+               '--endturn', '2000',
                'harpy',
                '--harpy_mode', 'bpm',
-               '--tunex=0.546',
-               '--tuney=0.612',
-               '--nattunex=0.546',
-               '--nattuney=0.612',
+               '--tunex=0.537',
+               '--tuney=0.585',
+               '--nattunex=0.537',
+               '--nattuney=0.585',
                '--tolerance=0.01',
                '--tune_clean_limit=10e-5']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
     p.wait()

@@ -6,4 +6,7 @@ TO-DO:
 	* Improve title placement of asynch plots.
 	* Fix horiz size of cmap plot.
 	[get_bpm_data.py]
-	* Add timers for each section, and total time.	
+	* Add timers for each section, and total time.
+	[func.py]
+	[[generate_dict()]]	
+	* function muwst accept input of dict_file from pathnames.txt
