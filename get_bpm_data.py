@@ -19,6 +19,8 @@ parser.add_argument('--bpmanalysis_off', '-bpma_off',
                     action='store_true')
 parser.add_argument('--plotbpma',
                     action='store_true')
+parser.add_argument('--BetaBeatsrc_mode',
+                    choices=['harmonic', 'both'])
 args = parser.parse_args()
 
 # Checking for debug option
@@ -125,7 +127,8 @@ p = Popen([python_exe,
            '--model_dir', model_dir,
            '--sdds_dir', temp_dir,
            '--harmonic_output_dir', harmonic_output_dir,
-           '--phase_output_dir', phase_output_dir])
+           '--phase_output_dir', phase_output_dir],
+           '--mode', args.BetaBeatsrc_mode])
 p.wait()
 print(" ********************************************\n",
       "get_bpm_data.py:\n",
@@ -270,7 +273,8 @@ if args.bpmanalysis_off != True:
                '--model_dir', model_dir,
                '--sdds_dir', temp_dir,
                '--harmonic_output_dir', harmonic_output_dir,
-               '--phase_output_dir', phase_output_dir])
+               '--phase_output_dir', phase_output_dir,
+               '--mode', 'both'])
     p.wait()
     print(" ********************************************\n",
           "get_bpm_data.py:\n",

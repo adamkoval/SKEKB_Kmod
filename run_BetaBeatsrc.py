@@ -27,7 +27,7 @@ parser.add_argument('--harmonic_output_dir', '-hod',
                   dest="hod",
                   action="store")
 parser.add_argument('--mode',
-                    choices=['harmonic', 'both']
+                    choices=['harmonic', 'both'])
 args = parser.parse_args()
 
 # Check for output directories for Beta-Beat.src scripts
@@ -65,7 +65,7 @@ for i, run in enumerate(sdds_files):
                '--tuney=0.585',
                '--nattunex=0.537',
                '--nattuney=0.585',
-               '--tolerance=0.01',
+               '--tolerance=0.025',
                '--tune_clean_limit=10e-5']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
     p.wait()
 
