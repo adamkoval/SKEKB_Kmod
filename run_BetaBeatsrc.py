@@ -3,6 +3,8 @@ import sys
 import os
 from subprocess import Popen
 import argparse
+import time
+from func import timer
 
 # Argument parser
 parser = argparse.ArgumentParser()
@@ -24,6 +26,8 @@ parser.add_argument('--phase_output_dir', '-pod',
 parser.add_argument('--harmonic_output_dir', '-hod',
                   dest="hod",
                   action="store")
+parser.add_argument('--mode',
+                    choices=['harmonic', 'both']
 args = parser.parse_args()
 
 # Check for output directories for Beta-Beat.src scripts
@@ -41,6 +45,7 @@ if len(os.listdir(args.pod)) != 0:
 # Run Beta-Beat.src srcripts in succession:
 sdds_files = os.listdir(args.sdds_dir)
 for i, run in enumerate(sdds_files):
+    start = time.time()
     print(" ********************************************\n",
           "run_BetaBeatsrc.py:\n",
           '"Working on file ' + str(i) + '/' + str(len(sdds_files)) + ': ' + str(run) + '"\n',
@@ -64,13 +69,19 @@ for i, run in enumerate(sdds_files):
                '--tune_clean_limit=10e-5']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
     p.wait()
 
-    # measure_optics.py
-    p = Popen([args.python_exe,
-               args.BetaBeatsrc_dir + 'measure_optics.py',
-               '--model', args.model_dir,
-               '--accel', 'skekb',
-               '--files', args.hod + run,
-               '--output', args.pod + run + '/'])
-    p.wait()
+    if args.mode == 'harmonic':
+        break
+    elif args.mode == 'both':
+        # measure_optics.py
+        p = Popen([args.python_exe,
+                   args.BetaBeatsrc_dir + 'measure_optics.py',
+                   '--model', args.model_dir,
+                   '--accel', 'skekb',
+                   '--files', args.hod + run,
+                   '--output', args.pod + run + '/'])
+        p.wait()
+
+    finish = time.time() - start
+    timer(i, len(sdds_files), finish)
 
 sys.exit()

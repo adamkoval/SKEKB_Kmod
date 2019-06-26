@@ -1,4 +1,9 @@
 TO-DO:
+	IMPORTANT:
+	[get_bpm_data.py]
+	* If sdds files exist, ask if you would like to over-write them. If not, skip the conversion.
+	* Separate the synched and unsynched outputs.
+
 	[general]
 	* Improve README.md
 	* Possibly add options to utilise various functions of the script, rather than all of them at once.

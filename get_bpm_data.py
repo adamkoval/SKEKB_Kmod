@@ -137,6 +137,34 @@ print(" ********************************************\n",
 #       in run.sad (generated below) as this one has been found to have 
 #       cleaner results.
 if args.bpmanalysis_off != True:
+    # First, a word of caution
+    print(' ###############################################\n',
+          'WARNING 1: First analysis has finished. The program will\n',
+          'now analyse asynchronous bpms, and after doing so it will\n',
+          'overwrite the phase_output/, harmonic_output/ and temp/\n',
+          'directories.\n',
+          'If you require any of these, please save now, before\n',
+          'continuing.\n',
+          '\n',
+          'WARNING 2: If you have switched on the flag "--plotbpma",\n',
+          'and you are using a Windows machine, please ensure that\n',
+          'you have an X server running, or launch the server the\n',
+          'server now.\n',
+          '###############################################\n',
+          '\n')
+    while True:
+        user_input = raw_input('To continue, type "go". To abort type "quit".\n')
+        if user_input == "go":
+            print("Continuing...")
+            break
+        elif user_input == "quit":
+            print("Quitting.")
+            sys.exit()
+            break
+        else:
+            print('Please enter a valid input (or try enclosing it in quotation marks).')
+            continue
+
     for axis in ['x', 'y']:
         # async.py
         p = Popen([python_exe,

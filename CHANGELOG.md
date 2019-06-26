@@ -204,3 +204,7 @@
 	[changed]
 	- generic_dict() now takes argument of file_dict, to enable generating
 	of custom name file_dict.
+
+	* get_bpm_data.py:
+	[added]
+	- Warning and user input before starting bpm analysis and second analysis.

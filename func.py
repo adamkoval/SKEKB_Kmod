@@ -2,6 +2,7 @@ from __future__ import print_function
 import os
 import re
 import numpy as np
+import sys
 
 # ====================================================
 # To be used in get_bpm_data.py
@@ -185,3 +186,32 @@ def get_data_column(phase_output_dir, folder, data, column):
         else:
             all_dat[headers[i]] = [float(rows[j].split()[i]) for j in range(len(rows))]
     return all_dat[column]
+
+
+# ====================================================
+# To be used in run_BetaBeatsrc.py
+# ====================================================
+
+def timer(i_current, i_total, time_i):
+    """
+    Estimates how long until analysis complete.
+    """
+    total_time = time_i * (i_total-1)
+    time_remaining = total_time - i_current*time_i
+    minutes = int(time_remaining//60)
+    seconds = int(round(time_remaining - minutes*60))
+    return print(" #####################################################\n",
+                 "TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER\n",
+                 "\n",
+                 "Approximate time remaining: ", str(minutes), "m" + str(seconds) + "s\n",
+                 "\n",
+                 "TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER\n",
+                 "#####################################################\n")
+    #sys.stdout.write('\r')
+    #sys.stdout.write("TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER\n" +
+    #                 "\n" +
+    #                 "Approximate time remaining: " + str(minutes) + "m" + str(seconds) + "s\n" +
+    #                 "\n" +
+    #                 "TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER TIMER\n")
+    #sys.stdout.flush()
+    #return
