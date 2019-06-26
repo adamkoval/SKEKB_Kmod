@@ -37,10 +37,10 @@ if not os.path.exists(args.hod):
 if not os.path.exists(args.pod):
     os.system("mkdir " + args.pod)
 
-if len(os.listdir(args.hod)) != 0:
-    os.system("rm " + args.hod + "/*")
-if len(os.listdir(args.pod)) != 0:
-    os.system("rm -r " + args.pod + "/*")
+#if len(os.listdir(args.hod)) != 0:
+#    os.system("rm " + args.hod + "/*")
+#if len(os.listdir(args.pod)) != 0:
+#    os.system("rm -r " + args.pod + "/*")
 
 # Run Beta-Beat.src srcripts in succession:
 sdds_files = os.listdir(args.sdds_dir)
@@ -58,7 +58,7 @@ for i, run in enumerate(sdds_files):
                '--outputdir', args.hod,
                '--model', args.model_dir + '/twiss.dat',
                '--startturn', '2',
-               '--endturn', '2000',
+               '--endturn', '15000',
                'harpy',
                '--harpy_mode', 'bpm',
                '--tunex=0.537',
@@ -66,11 +66,11 @@ for i, run in enumerate(sdds_files):
                '--nattunex=0.537',
                '--nattuney=0.585',
                '--tolerance=0.025',
-               '--tune_clean_limit=10e-5']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
+               '--tune_clean_limit=1e-5']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
     p.wait()
 
     if args.mode == 'harmonic':
-        break
+        pass
     elif args.mode == 'both':
         # measure_optics.py
         p = Popen([args.python_exe,

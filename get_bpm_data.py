@@ -61,79 +61,116 @@ ftwissbpm = main_output_dir + pathnames["ftwissbpm"]
 ftwissall = main_output_dir + pathnames["ftwissall"]
 fkmodu = main_output_dir + pathnames["fkmodu"]
 
-# Checking for a dictionary
-while True:
-    if look_for_dict(file_dict) == True:
-        break
-    else:
-        user_input = raw_input('There is no dictionary file present. Would you like to create a new one (input -> create) or would you like to provide one (input -> provide)?\n')
-        if user_input == 'create':
-            generic_dict(input_data_dir, ringID, file_dict)
-            continue
-        elif user_input == 'provide':
-            continue
 
-# Checking if temp/ and output/ dirs exist or are empty
-if os.path.exists(main_output_dir):
-    os.system("rm -r " + main_output_dir + "*")
-else:
-    os.system("mkdir " + main_output_dir)
+def sdds_conv():
+    # If you are starting from clean dir, you must have a dictionary
+    # Checking for a dictionary                                         
+    while True:
+        if look_for_dict(file_dict) == True:
+            break
+        else:
+            user_input = raw_input('There is no dictionary file present for .data -> .sdds conversion. Would you like to create a new one (input -> create) or would you like to provide one (input -> provide)?\n')
+            if user_input == 'create':
+                generic_dict(input_data_dir, ringID, file_dict)
+                continue
+            elif user_input == 'provide':
+                continue
 
+    # Conversion without asynch knowledge
+    file = open("prerun.sad", "w")
+    file.write(' READ "' + lattice_dir + lattice_name + '";\n'
+               ' FFS;\n'
+               '\n'
+               ' ring = "' + ringID + '";\n'
+               ' If[ring=="HER",\n'
+               '   FFS["USE ASCE"],\n'
+               '   If[ring=="LER",\n'
+               '     FFS["USE ASC"],\n'
+               '     Print["\t >> Enter correct ringID (HER or LER)"];\n'
+               '     FFS["end"]\n'
+               '     ]\n'
+               '   ]\n'
+               ' CELL; CALC;\n'
+               ' emit;\n\n'
+               ' Get["func.n"];\n\n'
+               ' runs = Get["' + file_dict + '"];\n'
+               ' Do[\n'
+               '   fnr1 = "./"//runs[i, 1];\n'
+               '   fbpm = "None";\n' # This line tells FormatBPMRead[] to convert without synch fix
+               '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
+               '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
+               '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
+               '   ,{i, 1, ' + loopend + '}];\n'
+               '\n'
+               ' abort;\n')
+    file.close()
+
+    os.system(gsad + " prerun.sad")
+    return print(" ********************************************\n",
+                 "get_bpm_data.py:\n",
+                 '"prerun.sad finished, running analysis script."\n',
+                 "********************************************")
+
+# Checking if temp/ dir exists
 if os.path.exists(temp_dir):
-    os.system("rm -r " + temp_dir + "*")
+    # Checking if it is empty
+    if os.listdir(temp_dir):
+        while True:
+            user_input = raw_input('sdds (temp) directory contains files. Would you like to clean the directory and start anew (options: yes, no, show contents)?\n')
+            if user_input == 'yes':
+                os.system("rm -r " + temp_dir + "*")
+                sdds_conv()
+                break
+            elif user_input == 'no':
+                break
+            elif user_input == 'show contents':
+                os.system('ls ' + temp_dir)
+                continue
+            else:
+                print('Please enter a valid string (see "options").')
+                continue
+    else:
+        sdds_conv()
 else:
     os.system("mkdir " + temp_dir)
+    sdds_conv()
 
-# Conversion without asynch knowledge
-file = open("prerun.sad", "w")
-file.write(' READ "' + lattice_dir + lattice_name + '";\n'
-           ' FFS;\n'
-           '\n'
-           ' ring = "' + ringID + '";\n'
-           ' If[ring=="HER",\n'
-           '   FFS["USE ASCE"],\n'
-           '   If[ring=="LER",\n'
-           '     FFS["USE ASC"],\n'
-           '     Print["\t >> Enter correct ringID (HER or LER)"];\n'
-           '     FFS["end"]\n'
-           '     ]\n'
-           '   ]\n'
-           ' CELL; CALC;\n'
-           ' emit;\n\n'
-           ' Get["func.n"];\n\n'
-           ' runs = Get["' + file_dict + '"];\n'
-           ' Do[\n'
-           '   fnr1 = "./"//runs[i, 1];\n'
-           '   fbpm = "None";\n' # This line tells FormatBPMRead[] to convert without synch fix
-           '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
-           '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
-           '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
-           '   ,{i, 1, ' + loopend + '}];\n'
-           '\n'
-           ' abort;\n')
-file.close()
 
-os.system(gsad + " prerun.sad")
-print(" ********************************************\n",
-      "get_bpm_data.py:\n",
-      '"prerun.sad finished, running analysis script."\n',
-      "********************************************")
+def betabeatanalysis():
+    p = Popen([python_exe,
+               'run_BetaBeatsrc.py',
+               '--python_exe', python_exe,
+               '--BetaBeatsrc_dir', BetaBeatsrc_path,
+               '--model_dir', model_dir,
+               '--sdds_dir', temp_dir,
+               '--harmonic_output_dir', harmonic_output_dir,
+               '--phase_output_dir', phase_output_dir,
+               '--mode', args.BetaBeatsrc_mode])
+    p.wait()
+    return print(" ********************************************\n",
+                 "get_bpm_data.py:\n",
+                 '"Beta-Beat.src analysis finished, checking asynchronous BPMs."\n',
+                 "********************************************")
 
 # Beta-Beat.src analysis
-p = Popen([python_exe,
-           'run_BetaBeatsrc.py',
-           '--python_exe', python_exe,
-           '--BetaBeatsrc_dir', BetaBeatsrc_path,
-           '--model_dir', model_dir,
-           '--sdds_dir', temp_dir,
-           '--harmonic_output_dir', harmonic_output_dir,
-           '--phase_output_dir', phase_output_dir],
-           '--mode', args.BetaBeatsrc_mode])
-p.wait()
-print(" ********************************************\n",
-      "get_bpm_data.py:\n",
-      '"Beta-Beat.src analysis finished, checking asynchronous BPMs."\n',
-      "********************************************")
+if os.path.exists(main_output_dir):
+    while True:
+        user_input = raw_input('Would you like to clean the output directory and start anew (options: yes, no, show_contents)?\n')
+        if user_input == 'yes':
+            os.system("rm -r " + main_output_dir + "*")
+            betabeatanalysis()
+            break
+        elif user_input == 'no':
+            break
+        elif user_input == 'show_contents':
+            os.system('ls ' + main_output_dir)
+            continue
+        else:
+            print('Please enter a valid string (see "options").')
+            continue
+else:
+    os.system("mkdir " + main_output_dir)
+    betabeatanalysis()
 
 # Asynch analysis before
 # NOTE: This analysis is being run for both axes, but the x-axis is used
