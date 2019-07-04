@@ -41,16 +41,16 @@ for i in range(len(Magnets)):
     avgQxs.append(np.average(Qx_subset))
     avgQys.append(np.average(Qy_subset))
 
-fn = 'tunes_1e-5cleanlim.txt'
+fn = 'tunes_1e-4cleanlim.txt'
 f = open(fn, 'w')
-f.write('Magnet\t\t\tdF[Hz]\t\t\tdK/k\t\t\tnux\t\t\tnux_std\t\t\tnuy\t\t\tnuy_std\n')
+f.write('Magnet\t\tdF[Hz]\t\tdK/k\t\tnux\t\t\tnux_std\t\t\tnuy\t\t\tnuy_std\n')
 for i in range(len(avgQxs)):
     f.write(Magnets[i] + '\t\t'
-            + str(dFs[i]) + '\t\t\t'
-            + str(dKs[i]) + '\t\t\t'
-            + str(avgQxs[i]) + '\t\t\t'
-            + str(Qx_errs[i]) + '\t\t\t'
-            + str(avgQys[i]) + '\t\t\t'
+            + str(RFs[i]) + '\t\t'
+            + str(dKs[i]) + '\t\t'
+            + str(avgQxs[i]) + '\t'
+            + str(Qx_errs[i]) + '\t'
+            + str(avgQys[i]) + '\t'
             + str(Qy_errs[i]) + '\n')
 f.close()
 

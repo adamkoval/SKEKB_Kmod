@@ -66,7 +66,7 @@ for i, run in enumerate(sdds_files):
                '--nattunex=0.537',
                '--nattuney=0.585',
                '--tolerance=0.04',
-               '--tune_clean_limit=1e-5']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
+               '--tune_clean_limit=1e-4']) # changed from 1e-5 to 10e-5 so that fewer BPMs are cleaned
     p.wait()
 
     if args.mode == 'harmonic':
