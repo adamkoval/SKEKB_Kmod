@@ -20,9 +20,6 @@ parser.add_argument('--axis', '-ax',
 parser.add_argument('--phase_output_dir', '-pod',
                     dest='phase_output_dir',
                     action='store')
-parser.add_argument('--main_output_dir', '-mod',
-                    dest='main_output_dir',
-                    action='store')
 parser.add_argument('--sdds_dir', '-sd',
                     dest='sdds_dir',
                     action='store')
@@ -39,7 +36,6 @@ axis = args.axis
 AXIS = axis.capitalize()
 sdds_dir = args.sdds_dir
 phase_output_dir = args.phase_output_dir
-main_output_dir = args.main_output_dir
 data = 'getphasetot' + axis + '.out'
 
 # List all files in phase_output_dir
@@ -104,7 +100,7 @@ ax.set_ylabel('Measurement run', fontsize=18)
 plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when  + ')', fontsize=22)
 
 if args.save == True:
-    plt.savefig(main_output_dir
+    plt.savefig(phase_output_dir + '../'
                 + 'Asynchronous_BPMs_colourmap_'
                 + axis + 'axis_' + args.when  +  '.png',
                 format = 'png')

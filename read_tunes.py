@@ -24,6 +24,18 @@ for file in files:
 Magnets = [re.search('([A-Z0-9]+)\_[-+]*[0-9]+\_[0-9a-z-]*\_[0-9]\.sdds', file).group(1) for file in files]
 RFs = [float(re.search('[A-Z0-9]+\_([-+]*[0-9]+)\_[0-9a-z-]*\_[0-9]\.sdds', file).group(1)) for file in files]
 dKs = [float(re.search('[A-Z0-9]+\_[-+]*[0-9]+\_([0-9a-z-]*)\_[0-9]\.sdds', file).group(1)) for file in files]
+
+# This is a test
+testarr = []
+testvar = Qxs
+for i in range(len(testvar)):
+    if Magnets[i] == 'QC1RE':
+        if RFs[i] == 200.0:
+            if dKs[i] == -0.0002:
+                testarr.append(testvar[i])
+                print(testvar[i])
+
+# Back to business
 Magnets = [k for i, k in enumerate(Magnets) if (i+1)%5==0]
 RFs = [k for i, k in enumerate(RFs) if (i+1)%5==0]
 dKs = [k for i, k in enumerate(dKs) if (i+1)%5==0]
@@ -41,7 +53,7 @@ for i in range(len(Magnets)):
     avgQxs.append(np.average(Qx_subset))
     avgQys.append(np.average(Qy_subset))
 
-fn = 'tunes_1e-4cleanlim.txt'
+fn = 'tunes_test.txt'
 f = open(fn, 'w')
 f.write('Magnet\t\tdF[Hz]\t\tdK/k\t\tnux\t\t\tnux_std\t\t\tnuy\t\t\tnuy_std\n')
 for i in range(len(avgQxs)):
@@ -53,10 +65,3 @@ for i in range(len(avgQxs)):
             + str(avgQys[i]) + '\t'
             + str(Qy_errs[i]) + '\n')
 f.close()
-
-#fn = 'tunes.txt'
-#f = open(fn, 'w')
-#f.write('file\t\t\t\tQx\t\t\tQy\n')
-#for i in range(len(Qxs)):
-#    f.write(files[i] + '\t\t' + str(Qxs[i]) + '\t\t' + str(Qys[i]) + '\n')
-#f.close()
