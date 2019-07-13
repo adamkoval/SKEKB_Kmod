@@ -72,6 +72,9 @@ X, Y = np.meshgrid(
     np.linspace(
         0, len(file_list), len(file_list) + 1))
 Z = df.T
+fn = phase_output_dir + '../cmapdf_' + args.when + '.csv'
+Z.to_csv(fn)
+Z = pandas.read_csv(fn, index_col=0)
 
 column_length = len(df.columns.tolist())
 row_length = len(BPM_list)
@@ -93,8 +96,16 @@ bar.ax.tick_params(labelsize=18)
 
 ax.set_xticks([i for i in range(row_length)])
 ax.set_xticklabels(BPM_list, rotation='vertical')
-ax.set_yticks([i+.5 for i in y_posn])
-ax.set_yticklabels([i[:-4] for i in df.columns.tolist()])
+#ax.set_yticks([i+.5 for i in y_posn])
+
+yticklabels = []
+all_meas = [i[:-4] for i in df.columns.tolist()]
+yticklabels.append(all_meas[0][:-3])
+for i in range(1, len(all_meas)):
+    if all_meas[i-1][:-3] != all_meas[i][:-3]:
+        yticklabels.append(all_meas[i][:-3])
+ax.set_yticks([i for i in y_posn if (i+1)%5==0])
+ax.set_yticklabels(yticklabels)
 ax.set_xlabel('BPM', fontsize=18)
 ax.set_ylabel('Measurement run', fontsize=18)
 plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when  + ')', fontsize=22)
