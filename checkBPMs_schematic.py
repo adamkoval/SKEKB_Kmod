@@ -19,9 +19,6 @@ parser.add_argument('--axis', '-ax',
 parser.add_argument('--async_output_dir', '-aod',
                     dest='async_output_dir',
                     action='store')
-parser.add_argument('--main_output_dir', '-mod',
-                    dest='main_output_dir',
-                    action='store')
 parser.add_argument('--sdds_dir', '-sd',
                     dest='sdds_dir',
                     action='store')
@@ -37,7 +34,6 @@ args = parser.parse_args()
 axis = args.axis
 sdds_dir = args.sdds_dir
 async_output_dir = args.async_output_dir
-main_output_dir = args.main_output_dir
 
 # List all files in outofphase*/ dir
 file_list = os.listdir(async_output_dir)
@@ -101,7 +97,7 @@ ax1.legend(handles=custom_legend, bbox_to_anchor=(1, 1))
 plt.title('SuperKEKB BPM performance from T-b-T data (' + axis + '-axis, ' + args.when + ')', y=1.02)
 
 if args.save == True:
-    plt.savefig(main_output_dir
+    plt.savefig(async_output_dir + '../'
                 + 'Asynchronous_BPMs_schematic_'
                 + axis + 'axis_' + args.when + '.png',
                 format='png')

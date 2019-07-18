@@ -52,9 +52,12 @@ model_dir = pathnames["model_dir"]
 
 # Output directories
 main_output_dir = pathnames["main_output_dir"]
-temp_dir = pathnames["temp_dir"]
-harmonic_output_dir = main_output_dir + "harmonic_output/"
-phase_output_dir = main_output_dir + "phase_output/"
+unsynched_sdds_dir = pathnames["unsynched_sdds_dir"]
+synched_sdds_dir = pathnames["synched_sdds_dir"]
+synched_harmonic_output_dir = main_output_dir + "synched_harmonic_output/"
+synched_phase_output_dir = main_output_dir + "synched_phase_output/"
+unsynched_harmonic_output_dir = main_output_dir + "unsynched_harmonic_output/"
+unsynched_phase_output_dir = main_output_dir + "unsynched_phase_output/"
 
 # Output files
 ftwissbpm = main_output_dir + pathnames["ftwissbpm"]
@@ -97,7 +100,7 @@ def sdds_conv():
                ' Do[\n'
                '   fnr1 = "./"//runs[i, 1];\n'
                '   fbpm = "None";\n' # This line tells FormatBPMRead[] to convert without synch fix
-               '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
+               '   fwt1 = "' + unsynched_sdds_dir + '"//runs[i, 2];\n'
                '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
                '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
                '   ,{i, 1, ' + loopend + '}];\n'
@@ -112,19 +115,19 @@ def sdds_conv():
                  "********************************************")
 
 # Checking if temp/ dir exists
-if os.path.exists(temp_dir):
+if os.path.exists(unsynched_sdds_dir):
     # Checking if it is empty
-    if os.listdir(temp_dir):
+    if os.listdir(unsynched_sdds_dir):
         while True:
-            user_input = raw_input('sdds (temp) directory contains files. Would you like to clean the directory and start anew (options: yes, no, show contents)?\n')
+            user_input = raw_input('Unsynched sdds (temp) directory contains files. Would you like to clean the directory and start anew (options: yes, no, show contents)?\n')
             if user_input == 'yes':
-                os.system("rm -r " + temp_dir + "*")
+                os.system("rm -r " + unsynched_sdds_dir + "*")
                 sdds_conv()
                 break
             elif user_input == 'no':
                 break
             elif user_input == 'show contents':
-                os.system('ls ' + temp_dir)
+                os.system('ls ' + unsynched_sdds_dir)
                 continue
             else:
                 print('Please enter a valid string (see "options").')
@@ -132,19 +135,19 @@ if os.path.exists(temp_dir):
     else:
         sdds_conv()
 else:
-    os.system("mkdir " + temp_dir)
+    os.system("mkdir " + unsynched_sdds_dir)
     sdds_conv()
 
 
-def betabeatanalysis():
+def betabeatanalysisbefore():
     p = Popen([python_exe,
                'run_BetaBeatsrc.py',
                '--python_exe', python_exe,
                '--BetaBeatsrc_dir', BetaBeatsrc_path,
                '--model_dir', model_dir,
-               '--sdds_dir', temp_dir,
-               '--harmonic_output_dir', harmonic_output_dir,
-               '--phase_output_dir', phase_output_dir,
+               '--sdds_dir', unsynched_sdds_dir,
+               '--harmonic_output_dir', unsynched_harmonic_output_dir,
+               '--phase_output_dir', unsynched_phase_output_dir,
                '--mode', args.BetaBeatsrc_mode])
     p.wait()
     return print(" ********************************************\n",
@@ -154,23 +157,24 @@ def betabeatanalysis():
 
 # Beta-Beat.src analysis
 if os.path.exists(main_output_dir):
-    while True:
-        user_input = raw_input('Would you like to clean the output directory and start anew (options: yes, no, show_contents)?\n')
-        if user_input == 'yes':
-            os.system("rm -r " + main_output_dir + "*")
-            betabeatanalysis()
-            break
-        elif user_input == 'no':
-            break
-        elif user_input == 'show_contents':
-            os.system('ls ' + main_output_dir)
-            continue
-        else:
-            print('Please enter a valid string (see "options").')
-            continue
+    betabeatanalysisbefore()
+    #while True:
+    #    user_input = raw_input('Would you like to clean the output directory and start anew (options: yes, no, show contents)?\n')
+    #    if user_input == 'yes':
+    #        os.system("rm -r " + main_output_dir + "*")
+    #        betabeatanalysisbefore()
+    #        break
+    #    elif user_input == 'no':
+    #        break
+    #    elif user_input == 'show contents':
+    #        os.system('ls ' + main_output_dir)
+    #        continue
+    #    else:
+    #        print('Please enter a valid string (see "options").')
+    #        continue
 else:
     os.system("mkdir " + main_output_dir)
-    betabeatanalysis()
+    betabeatanalysisbefore()
 
 # Asynch analysis before
 # NOTE: This analysis is being run for both axes, but the x-axis is used
@@ -209,7 +213,7 @@ if args.bpmanalysis_off != True:
         # async.py
         p = Popen([python_exe,
                    'async.py',
-                   '--phase_output_dir', phase_output_dir,
+                   '--phase_output_dir', unsynched_phase_output_dir,
                    '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
                    '--axis', axis])
         p.wait()
@@ -219,9 +223,8 @@ if args.bpmanalysis_off != True:
             p = Popen([python_exe,
                        'checkBPMs_schematic.py',
                        '--axis', axis,
-                       '--sdds_dir', temp_dir,
+                       '--sdds_dir', unsynched_sdds_dir,
                        '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
-                       '--main_output_dir', main_output_dir,
                        '--when', 'before',
                        '--save'])
             p.wait()
@@ -230,9 +233,8 @@ if args.bpmanalysis_off != True:
             p = Popen([python_exe,
                        'checkBPMs_colormap.py',
                        '--axis', axis,
-                       '--sdds_dir', temp_dir,
-                       '--phase_output_dir', phase_output_dir,
-                       '--main_output_dir', main_output_dir,
+                       '--sdds_dir', unsynched_sdds_dir,
+                       '--phase_output_dir', unsynched_phase_output_dir,
                        '--when', 'before',
                        '--save'])
             p.wait()
@@ -241,7 +243,12 @@ if args.bpmanalysis_off != True:
           "get_bpm_data.py:\n",
           '"Asynchronous BPMs found, converting raw -> sdds with synch fix."\n',
           "********************************************")
-    
+
+    if os.path.exists(synched_sdds_dir):
+        pass
+    else:
+        os.system('mkdir ' + synched_sdds_dir)
+
     # Conversion with asynch knowledge + KModu simulation
     file = open("run.sad", "w")
     file.write(' READ "' + lattice_dir + lattice_name + '";\n'
@@ -265,8 +272,8 @@ if args.bpmanalysis_off != True:
                ' runs = Get["' + file_dict + '"];\n'
                ' Do[\n'
                '   fnr1 = "./"//runs[i, 1];\n'
-               '   fbpm = "' + main_output_dir + 'outofphasex/"//runs[i, 2]//".txt";\n' # NOTE: outofphasex is used because it seems to have a cleaner output for resync.
-               '   fwt1 = "' + temp_dir + '"//runs[i, 2];\n'
+               '   fbpm = "' + main_output_dir + 'outofphasey/"//runs[i, 2]//".txt";\n' # NOTE: outofphasey is used because it seems to have a cleaner output for resync.
+               '   fwt1 = "' + synched_sdds_dir + '"//runs[i, 2];\n'
                '   FormatBPMRead[fnr1, fwt1, fbpm];\n'
                '   Print["Converting "//runs[i, 1]//" -> "//runs[i, 2]];\n'
                '   ,{i, 1, ' + loopend + '}];\n'
@@ -308,9 +315,9 @@ if args.bpmanalysis_off != True:
                '--python_exe', python_exe,
                '--BetaBeatsrc_dir', BetaBeatsrc_path,
                '--model_dir', model_dir,
-               '--sdds_dir', temp_dir,
-               '--harmonic_output_dir', harmonic_output_dir,
-               '--phase_output_dir', phase_output_dir,
+               '--sdds_dir', synched_sdds_dir,
+               '--harmonic_output_dir', synched_harmonic_output_dir,
+               '--phase_output_dir', synched_phase_output_dir,
                '--mode', 'both'])
     p.wait()
     print(" ********************************************\n",
@@ -326,7 +333,7 @@ if args.bpmanalysis_off != True:
         # async.py
         p = Popen([python_exe,
                    'async.py',
-                   '--phase_output_dir', phase_output_dir,
+                   '--phase_output_dir', synched_phase_output_dir,
                    '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
                    '--axis', axis])
         p.wait()
@@ -336,9 +343,8 @@ if args.bpmanalysis_off != True:
             p = Popen([python_exe,
                        'checkBPMs_schematic.py',
                        '--axis', axis,
-                       '--sdds_dir', temp_dir,
+                       '--sdds_dir', synched_sdds_dir,
                        '--async_output_dir', main_output_dir + 'outofphase' + axis + '/',
-                       '--main_output_dir', main_output_dir,
                        '--when', 'after',
                        '--save'])
             p.wait()
@@ -347,9 +353,8 @@ if args.bpmanalysis_off != True:
             p = Popen([python_exe,
                        'checkBPMs_colormap.py',
                        '--axis', axis,
-                       '--sdds_dir', temp_dir,
-                       '--phase_output_dir', phase_output_dir,
-                       '--main_output_dir', main_output_dir,
+                       '--sdds_dir', synched_sdds_dir,
+                       '--phase_output_dir', synched_phase_output_dir,
                        '--when', 'after',
                        '--save'])
             p.wait()

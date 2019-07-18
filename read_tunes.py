@@ -4,7 +4,7 @@ import re
 import numpy as np
 
 sdds_dir = 'temp_current'
-harmonic_path = 'output_current/harmonic_output/'
+harmonic_path = 'output_current_bup/harmonic_output/'
 files = os.listdir(sdds_dir)
 
 # Extract tunes
